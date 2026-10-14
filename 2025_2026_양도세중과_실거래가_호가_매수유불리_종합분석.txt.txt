@@ -1,0 +1,1123 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2025.06~2026.09 다주택자 양도세 중과 유예 해제: 실거래가·호가 선후행 및 매수 유불리 종합 분석</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --muted: #475569;
+    --accent: #1e40af;
+    --accent-light: #eff6ff;
+    --danger: #dc2626;
+    --danger-light: #fef2f2;
+    --success: #15803d;
+    --success-light: #f0fdf4;
+    --warn: #d97706;
+    --warn-light: #fffbeb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #fff;
+    padding: 28px 32px;
+    border-radius: 14px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  }
+  header .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  header .badge {
+    background: rgba(255,255,255,0.15);
+    color: #e0f2fe;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  header h1 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  header p {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 14px;
+  }
+  .exec-box {
+    background: var(--card);
+    border-left: 5px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(15,23,42,0.05);
+  }
+  .exec-box h2 {
+    margin: 0 0 12px 0;
+    font-size: 17px;
+    color: var(--accent);
+  }
+  .exec-lines {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 14.5px;
+  }
+  .exec-lines li {
+    margin-bottom: 8px;
+  }
+  .section-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(15,23,42,0.04);
+  }
+  .section-card h2 {
+    margin: 0 0 6px 0;
+    font-size: 19px;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-sub {
+    margin: 0 0 18px 0;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  /* Interactive Chart Controls */
+  .apt-btn-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .apt-btn {
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #334155;
+    padding: 7px 13px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+  .apt-btn:hover {
+    background: #e2e8f0;
+  }
+  .apt-btn.active {
+    background: #0f172a;
+    color: #ffffff;
+    border-color: #0f172a;
+    box-shadow: 0 2px 6px rgba(15,23,42,0.2);
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .chart-wrap {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px;
+    overflow-x: auto;
+  }
+  .chart-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: #f1f5f9;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .legend-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 12.5px;
+    color: #334155;
+  }
+  .legend-inline span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  /* Tables */
+  .table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: #f1f5f9;
+    color: #1e293b;
+    font-weight: 700;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid #cbd5e1;
+    white-space: nowrap;
+  }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  tr:hover td {
+    background: #f8fafc;
+  }
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+  }
+  .tag-red { background: var(--danger-light); color: var(--danger); }
+  .tag-blue { background: var(--accent-light); color: var(--accent); }
+  .tag-green { background: var(--success-light); color: var(--success); }
+  .tag-warn { background: var(--warn-light); color: var(--warn); }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 16px;
+    margin-top: 14px;
+  }
+  .pattern-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    background: #fcfdff;
+  }
+  .pattern-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 15.5px;
+    color: #1e293b;
+  }
+  .pattern-card p, .pattern-card ul {
+    margin: 0;
+    font-size: 13.5px;
+    color: #334155;
+  }
+  .pattern-card ul {
+    padding-left: 18px;
+    margin-top: 6px;
+  }
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .filter-bar input, .filter-bar select {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="badge-row">
+      <span class="badge">검토 기간: 2025.06 ~ 2026.09 (16개월)</span>
+      <span class="badge">원본 대조: 261011 부동산.xlsx (8개 시트 + 아실 캡처 15종)</span>
+      <span class="badge">분석 대상: 서울·경기 35개 주요 단지 (실거래·매도최저호가·전세호가 통합)</span>
+    </div>
+    <h1>2025.06~2026.09 다주택자 양도세 중과 유예 해제: 실거래가·호가 선후행 및 매수 유불리 종합 분석</h1>
+    <p>드라이브 &gt; 재테크 스터디 &gt; <a href="https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk" target="_blank" style="color:#93c5fd;text-decoration:underline;">261011 부동산.xlsx</a>의 시계열 호가 데이터와 2025년 6월~2026년 9월 국토교통부 실거래가를 결합한 통합 리포트입니다.</p>
+  </header>
+
+
+  <div class="exec-box">
+    <h2>핵심 요약 (Executive Summary)</h2>
+    <ol class="exec-lines">
+      <li><strong>실거래가-호가 선후행 관계:</strong> 5월 9일 유예 종료 전후 상급지 대단지(<strong>잠실엘스·성복역롯데캐슬</strong>)에서는 <strong>최저매매호가가 실거래가보다 3~4주 선행</strong>하여 바닥(5/2)과 반등(5/25, +10.7%)을 먼저 그렸고, <strong>리센츠·광교중흥S-클래스·고덕그라시움</strong>은 매매 최저호가 변동이 완만한 대신 <strong>84㎡ 전세호가가 먼저 급등(+13~17%)</strong>하며 매매 실거래가를 밀어 올렸습니다. 반면 <strong>신정마을1단지(59㎡)·헬리오시티·올림픽파크포레온</strong>은 급매 소화 직후 <strong>실거래가가 최저호가를 먼저 뚫고 올라간 뒤 호가가 후행 상향</strong>되는 패턴을 보였습니다.</li>
+      <li><strong>정책 영향도 최상위 단지:</strong> 「발표 후~마감 전 절세 급매 할인 폭 및 거래 집중도 → 5/10 중과 시행 후 매물 잠김 및 V자 가격 복원력」 기준 <strong>1위 올림픽파크포레온</strong>(32.0억→27.2억 급매→31.3억 복원), <strong>2위 잠실엘스</strong>(37.0억→31.0억 급매/최저호가 27.0억→33.8억 복원), <strong>3위 리센츠</strong>(2층 29.4억 급매 소화 후 36.0~37.0억 신고가), <strong>4위 래미안원베일리</strong>(62.5억→3층 54.5억 급매 후 마감일 59.0억 체결), <strong>5위 헬리오시티</strong>(4~5월 초 36건 대량 소화 후 30.55억 돌파) 순으로 정책 영향을 강하게 받았습니다.</li>
+      <li><strong>정책 변수 단일 통제 시 최적 매수 전략:</strong> 리모델링 이주 수요(수지)나 비규제 풍선효과(동탄: 7/1 후속 규제) 등 외부 변수를 제거하고 오직 <strong>'다주택자 양도세 중과 유예 종료 및 보완방안(잔금 4~6개월 유예 + 토허구역 내 다주택 세 낀 매물 실거주 유예)' 단일 변수</strong>만 놓고 보면, <strong>2026년 3월 하순~4월 중순 다주택 절세 급매가 쏟아진 토허구역·규제지역 대단지(1순위 올림픽파크포레온 27.2~27.5억, 2순위 잠실엘스 31.0~31.5억·리센츠 29.4~33.5억, 3순위 헬리오시티·파크리오 27.95~28.0억)의 '세 낀 급매물'을 매수하는 것</strong>이 마감 직후 +2.6억~4.1억(+9~15%)의 확정적 시세 복원 차익을 거두는 가장 유리한 선택이었습니다.</li>
+    </ol>
+  </div>
+
+
+  <!-- SECTION 1: INTERACTIVE CHART -->
+  <div class="section-card">
+    <h2>1. 2025.06 ~ 2026.09 단지별 실거래가 · 매도최저호가 · 전세호가 인터랙티브 차트</h2>
+    <p class="section-sub">하단 단지 버튼을 클릭하거나 그래프 내 선·포인트를 클릭하면 <strong>해당 아파트단지만 단독으로 필터링</strong>되며, 선택된 단지의 <strong>실거래가(실선) · 매도최저호가(파란 점선) · 84㎡ 전세호가(초록 점선)</strong>를 동시에 비교할 수 있습니다.</p>
+
+
+    <div class="apt-btn-grid" id="aptBtnContainer"></div>
+
+
+    <div class="chart-status-bar">
+      <div id="chartStatusText"><strong>현재 보기:</strong> 전체 14개 핵심 단지 실거래가 한눈에 비교 (단지를 클릭하면 매도최저호가·전세호가 보조선이 함께 표시됩니다)</div>
+      <div class="legend-inline">
+        <span><svg width="22" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="#0f172a" stroke-width="2.5"/></svg> 실거래가(억)</span>
+        <span><svg width="22" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="#2563eb" stroke-width="2" stroke-dasharray="5,3"/></svg> 매도최저호가(단독뷰)</span>
+        <span><svg width="22" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="#16a34a" stroke-width="2" stroke-dasharray="3,3"/></svg> 전세호가(단독뷰)</span>
+        <span style="color:#d97706;font-weight:700;">┆ 26.01.23 연장불가 시사</span>
+        <span style="color:#dc2626;font-weight:700;">┆ 26.02.12 종료·보완 발표</span>
+        <span style="color:#1e3a8a;font-weight:700;">┆ 26.05.09 유예종료·중과시행</span>
+        <span style="color:#7c3aed;font-weight:700;">┆ 26.07.01 동탄·기흥 토허제</span>
+        <span style="color:#475569;font-weight:700;">┆ 26.08.03 세제개편안</span>
+      </div>
+    </div>
+
+
+    <div class="chart-wrap">
+      <svg id="priceChartSvg" viewBox="0 0 1260 540" width="100%" height="540" style="min-width:920px;display:block;user-select:none;"></svg>
+    </div>
+  </div>
+
+
+  <!-- SECTION 2: 261011 부동산.xlsx 호가 시계열 요약 -->
+  <div class="section-card">
+    <h2>2. [드라이브 &gt; 261011 부동산.xlsx] 비교 검토 단지별 호가·전세호가·실거래가 시계열 대조</h2>
+    <p class="section-sub"><a href="https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk" target="_blank">261011 부동산.xlsx</a>의 8개 시트(260307, 260314, 260321, 260404, 260418, 260502, 260525, 260712) 및 2026년도 아실 캡처에 수록된 비교 검토 단지들의 호가 흐름과 2025.06~2026.09 실거래가 대조표입니다.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>권역</th>
+            <th>단지명 (기준면적)</th>
+            <th>세대수</th>
+            <th>25.06~26.02<br>초기 실거래(억)</th>
+            <th>26.03~05.09<br>급매기 실거래(억)</th>
+            <th>매도최저호가 추이 (억)<br>(3~4월 → 5/2 → 5/25 → 7/12)</th>
+            <th>84㎡ 전세호가 추이 (억)<br>(3~4월 → 5/2 → 5/25 → 7/12)</th>
+            <th>26.05.10~09월<br>중과후 실거래(억)</th>
+            <th>호가-실거래 관계 유형</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>송파구</td>
+            <td><strong><a href="https://cy-on.kr/trades/7969/" target="_blank">잠실엘스</a></strong> (84㎡)</td>
+            <td class="num">5,678</td>
+            <td class="num">31.5 → 33.0 → 37.0</td>
+            <td class="num">34.2 → 31.5 → <strong>31.0</strong></td>
+            <td class="num">30.5 → <strong>27.0</strong> → <strong>29.9</strong> → 32.0</td>
+            <td class="num">9.95 → 12.5 → 11.95 → 12.9</td>
+            <td class="num">32.8(5월) → <strong>33.8</strong>(6~7월) → 33.25(9월)</td>
+            <td><span class="tag tag-blue">최저호가 3~4주 선행 반등</span></td>
+          </tr>
+          <tr>
+            <td>송파구</td>
+            <td><strong><a href="https://cy-on.kr/trades/7960/" target="_blank">리센츠</a></strong> (84㎡)</td>
+            <td class="num">5,563</td>
+            <td class="num">33.8 (2/28)</td>
+            <td class="num">34.4 / <strong>29.4(2층)</strong> / 33.5(4월)</td>
+            <td class="num">30.0 → 32.4 → 32.5 → 32.9</td>
+            <td class="num">11.9 → <strong>13.45</strong> → 13.5 → <strong>13.95</strong></td>
+            <td class="num">34.1(5월후) → <strong>34.95</strong>(6~7월, 최고37.0) → 34.8(9월)</td>
+            <td><span class="tag tag-green">전세호가 선행 · 매매 지지</span></td>
+          </tr>
+          <tr>
+            <td>송파구</td>
+            <td><strong><a href="https://cy-on.kr/trades/8014/" target="_blank">헬리오시티</a></strong> (84㎡)</td>
+            <td class="num">9,510</td>
+            <td class="num">-</td>
+            <td class="num">28.4(4/9) → <strong>27.97</strong>(5/1)</td>
+            <td class="num">26.65 → 26.45 → <strong>26.2</strong> → <strong>28.5</strong></td>
+            <td class="num">10.95 → 10.95 → 10.95 → <strong>12.1</strong></td>
+            <td class="num"><strong>28.6</strong>(5월후) → 28.2(6월) → <strong>30.0</strong>(7월) → <strong>30.55</strong>(9월)</td>
+            <td><span class="tag tag-warn">실거래 5월 선행 · 호가 7월 후행</span></td>
+          </tr>
+          <tr>
+            <td>강동구</td>
+            <td><strong><a href="https://cy-on.kr/trades/8574/" target="_blank">올림픽파크포레온</a></strong> (84㎡)</td>
+            <td class="num">12,032</td>
+            <td class="num"><strong>32.0</strong> (25.10.19)</td>
+            <td class="num"><strong>27.2</strong>(3/4) → 27.5(4/22) → 28.0(5월)</td>
+            <td class="num"><strong>26.8</strong> → 27.5 → 27.4 → <strong>29.0</strong></td>
+            <td class="num">9.9 → 10.0 → 10.0 → <strong>14.0</strong></td>
+            <td class="num"><strong>31.3</strong>(6/25) → 30.0(7월) → 30.5(8/22) → 28.9(9월)</td>
+            <td><span class="tag tag-red">호가·실거래 동반바닥 후 V자복원</span></td>
+          </tr>
+          <tr>
+            <td>강동구</td>
+            <td><strong><a href="https://kbland.kr/se/c/34391" target="_blank">고덕그라시움</a></strong> (84㎡)</td>
+            <td class="num">4,932</td>
+            <td class="num">24.99(1/22) / 18.5(2/15특수)</td>
+            <td class="num">25.1(4월) → <strong>23.6</strong>(5/22)</td>
+            <td class="num">23.9 → 23.45 → 24.0 → 24.9</td>
+            <td class="num">9.5 → 10.0 → 10.0 → <strong>11.0</strong></td>
+            <td class="num">25.0~25.45(6월말) → 24.9(7월) → 24.5(9월)</td>
+            <td><span class="tag tag-green">전세호가 선행 · 후기 완만회복</span></td>
+          </tr>
+          <tr>
+            <td>서초구</td>
+            <td><strong><a href="https://www.mk.co.kr/news/realestate/12106323" target="_blank">래미안원베일리</a></strong> (84㎡)</td>
+            <td class="num">2,990</td>
+            <td class="num">63.0 (25.06 중위)</td>
+            <td class="num">62.5(3/2) → <strong>54.5(4/10 3층)</strong> → 59.0(5/9)</td>
+            <td class="num">41.0(전체최저) / 84㎡ 50.0~53.5</td>
+            <td class="num">18.0 (84㎡ 기준)</td>
+            <td class="num">53.5(5/12 2층) → <strong>56.3</strong>(6/24 20층)</td>
+            <td><span class="tag tag-red">마감일(5/9) 절세 막판계약 집중</span></td>
+          </tr>
+          <tr>
+            <td>서초·강남</td>
+            <td><strong>아크로리버파크·퍼스티지·압구정현대</strong></td>
+            <td class="num">1,612~2,954</td>
+            <td class="num">아리팍 53.9(25.11)→53.0(2/18)<br>퍼스티지 48.5(2/12)<br>압구정 48.5~49.0(2월)</td>
+            <td class="num">초고가 다주택 매물 호가 조정</td>
+            <td class="num">아리팍 최저 49.0 / 현대8차 평균 49.38</td>
+            <td class="num">-</td>
+            <td class="num">압구정현대 57.0(7/8, 115㎡) / 아리팍 53.9(9월)</td>
+            <td><span class="tag tag-blue">대출 2억 한도·현금매수 시장</span></td>
+          </tr>
+          <tr>
+            <td>용인 수지</td>
+            <td><strong><a href="https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운" target="_blank">성복역롯데캐슬골드타운</a></strong> (84㎡)</td>
+            <td class="num">2,356</td>
+            <td class="num">15.8(25.10) → 16.65(2/3)</td>
+            <td class="num">17.4(3/11) → <strong>15.4(4/8)</strong> → 16.6(5/8)</td>
+            <td class="num">16.0 → <strong>15.8</strong> → <strong>16.5</strong> → <strong>17.5</strong></td>
+            <td class="num">8.0 → 9.0 → 8.5 → 9.0 → 8.0</td>
+            <td class="num">16.9(5월후) → 16.95(6월) → 17.93(7월) → <strong>18.4</strong>(9월)</td>
+            <td><span class="tag tag-blue">최저호가 선행조정·조기반등</span></td>
+          </tr>
+          <tr>
+            <td>수원 영통</td>
+            <td><strong><a href="https://www.jipgap.com/complex/41117/광교중흥에스클래스" target="_blank">광교중흥S-클래스</a></strong> (84㎡)</td>
+            <td class="num">2,231</td>
+            <td class="num">16.8(25.09) → 17.15(2/4)</td>
+            <td class="num">17.8(4/7) → 17.55(5/8)</td>
+            <td class="num">17.0 → 17.3 → 17.4 → 17.5 → <strong>18.0</strong></td>
+            <td class="num">8.8 → 10.0 → 10.0 → <strong>11.0</strong> → 10.0</td>
+            <td class="num">17.2(5/21) → <strong>18.4</strong>(6월) → 18.95(7월) → <strong>19.9</strong>(9월)</td>
+            <td><span class="tag tag-green">호가 하방지지 후 6~9월 실거래 급등</span></td>
+          </tr>
+          <tr>
+            <td>성남 수정</td>
+            <td><strong><a href="https://apthi.kr/apttrade/411316951/202602" target="_blank">산성역포레스티아</a></strong> (84㎡)</td>
+            <td class="num">4,089</td>
+            <td class="num">14.8 (25.08.25)</td>
+            <td class="num"><strong>13.5</strong>(3/1) → 15.4(4/8, 특수11.1별도)</td>
+            <td class="num">13.5 → 15.5 → 15.0 → 20.0(이상치) → 16.0</td>
+            <td class="num">8.0 → 8.0 → 0(매물소진) → 6.8</td>
+            <td class="num">15.2(5월) → <strong>17.0</strong>(6/20, 중앙15.9) → 16.8(8월)</td>
+            <td><span class="tag tag-warn">3월 급매소화 후 계단식 상승</span></td>
+          </tr>
+          <tr>
+            <td>수지 상현</td>
+            <td><strong><a href="https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스" target="_blank">광교자이더클래스</a></strong> (84㎡)</td>
+            <td class="num">445</td>
+            <td class="num">14.17(1/24) → 14.5(2/15)</td>
+            <td class="num">14.85 (4/16)</td>
+            <td class="num">13.8 → 14.8 → 14.5 → 14.8 → 15.0 → 15.2</td>
+            <td class="num">- → 8.85(5/25) → 8.5(7/12)</td>
+            <td class="num">15.25(5/25) → 15.48(6월) → 15.95(7월) → <strong>16.4</strong>(8월)</td>
+            <td><span class="tag tag-green">호가·실거래 완만한 동행 우상향</span></td>
+          </tr>
+          <tr>
+            <td>용인 수지</td>
+            <td><strong><a href="https://www.jipgap.com/complex/41465/신정마을주공1" target="_blank">신정마을1단지</a></strong> (59㎡)</td>
+            <td class="num">1,044</td>
+            <td class="num">10.1(25.11) → 10.48(1월) → 11.5(2월)</td>
+            <td class="num">10.8(3/21) → 11.8(4/9) → <strong>12.5</strong>(5/6)</td>
+            <td class="num">11.5 → 11.2 → 11.5 → 11.5 → <strong>12.5</strong>(7/12)</td>
+            <td class="num">59㎡ 전세: 5.5 → 5.4 → 5.2 → 4.7 → 5.1</td>
+            <td class="num">12.0(6월) → 12.3(7월) → <strong>12.85</strong>(8월, 최고12.9)</td>
+            <td><span class="tag tag-warn">15억이하 실거래 선행 · 호가 후행</span></td>
+          </tr>
+          <tr>
+            <td>용인 수지</td>
+            <td><strong><a href="https://disco.re/l/s690ci" target="_blank">주공9단지(신정9)</a></strong> (59㎡)</td>
+            <td class="num">812</td>
+            <td class="num">-</td>
+            <td class="num">11.3(3/17) → 11.6(4/7)</td>
+            <td class="num">11.0 → 11.0 → 11.0 → <strong>12.8</strong>(7/12)</td>
+            <td class="num">59㎡ 전세: 5.2 고정</td>
+            <td class="num"><strong>12.15</strong> (6/27)</td>
+            <td><span class="tag tag-warn">실거래 선행 상승 후 7월 호가 점프</span></td>
+          </tr>
+          <tr>
+            <td>용인 수지</td>
+            <td><strong><a href="https://apt.k9gle.com/apt/7704/풍덕천동-신정7단지-상록-공무원" target="_blank">신정마을7단지상록</a></strong> (84㎡)</td>
+            <td class="num">670</td>
+            <td class="num">11.5(1/20) → 13.8(2/14)</td>
+            <td class="num">14.0 (4/28)</td>
+            <td class="num">10.3 → 13.5 → 13.2 → <strong>13.5 고정</strong></td>
+            <td class="num">59㎡ 전세: 6.1 → 0(소진) → 5.8</td>
+            <td class="num">13.8(5/16) → 14.0(7월) → <strong>14.45</strong>(8월)</td>
+            <td><span class="tag tag-blue">호가 13.5억 장기 고정 · 후행 상승</span></td>
+          </tr>
+          <tr>
+            <td>위례권</td>
+            <td><strong>위례중앙푸르지오1 · 포레자이 · 자이더시티</strong></td>
+            <td class="num">163~800</td>
+            <td class="num">자이더시티 15.2(25.07)<br>포레자이 14.0(25.12)→16.5(2/14)<br>중앙푸르지오 22.0(1/28)</td>
+            <td class="num">포레자이 15.5(4/6) / 10.5(4/23특수)</td>
+            <td class="num">중앙 22.5→21.5→23.0→22.0<br>포레자이 17.0→16.5 고정</td>
+            <td class="num">중앙 8.7→8.5→0→10.0<br>포레자이 8.5→7.5→8.0→9.5</td>
+            <td class="num">중앙 15.3(5/30특수) / 20.6(6월 정상)<br>9월 매매 거래 공백</td>
+            <td><span class="tag tag-blue">호가 견조 · 저가 특수거래 괴리 주의</span></td>
+          </tr>
+          <tr>
+            <td>수원 영통</td>
+            <td><strong>자연앤자이1단지</strong> (116㎡+)</td>
+            <td class="num">273</td>
+            <td class="num">17.0~18.2 (1~2월)</td>
+            <td class="num">17.0~17.4(4월) → 17.0(5/5)</td>
+            <td class="num">미관측 → 18.5(5/25) → <strong>19.5</strong>(7/12)</td>
+            <td class="num">11.5(5/25) → 10.5(7/12)</td>
+            <td class="num">6~8월 공백 후 9월 <strong>19.875</strong>(2건 평균)</td>
+            <td><span class="tag tag-green">7월 호가 상향(19.5억)이 9월 실거래 선행</span></td>
+          </tr>
+          <tr>
+            <td>분당·판교·기흥·동탄</td>
+            <td><strong>파크뷰 · 판교그랑블 · 정자아이파크 · 판교원9 · 기흥지웰 · 동탄롯데/다은</strong></td>
+            <td class="num">441~1,829</td>
+            <td class="num">정자아이파크 15.6(25.08)→17.2(1/15)<br>판교원9 17.8(2/25)<br>기흥지웰 10.5(1/25)<br>동탄다은 9.5(2/10)</td>
+            <td class="num">파크뷰 21.5(2/5)→<strong>26.5(4/28)</strong><br>판교그랑블 29.0→35.7→<strong>41.8(5/8)</strong><br>동탄롯데 18.8→22.0</td>
+            <td class="num">260307~260314 초기 비교군 수록 후 주요 추적군으로 압축</td>
+            <td class="num">정자아이파크 전세 10.7(25.10)→10.5(26.09)</td>
+            <td class="num">파크뷰 26.4(6/19)<br>동탄롯데 <strong>22.25(6/4 신고가)</strong></td>
+            <td><span class="tag tag-red">비규제 풍선효과(동탄) · 상급지 신고가</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- SECTION 3: ASKING PRICE VS REAL TRANSACTION RELATIONSHIP -->
+  <div class="section-card">
+    <h2>3. 실거래가와 호가(최저호가·전세호가)의 관계 심층 검토: 최저호가는 실거래가에 선행하는가?</h2>
+    <p class="section-sub">2번 통합 CSV와 1번 엑셀 파일의 호가 시계열을 교차 검증한 결과, <strong>단지의 유동성·가격대(대출 한도)·매도자 급매 압력</strong>에 따라 호가와 실거래가의 선후행 관계는 단일 법칙이 아닌 <strong>4가지 뚜렷한 구조적 패턴</strong>으로 분화되었습니다.</p>
+
+
+    <div class="grid-2">
+      <div class="pattern-card">
+        <h3>패턴 ① 최저매매호가 선행형 (최저호가 3~4주 선행 하락 및 선행 반등)</h3>
+        <p><span class="tag tag-blue">대표 단지: 잠실엘스, 성복역롯데캐슬골드타운, 자연앤자이1단지</span></p>
+        <ul>
+          <li><strong>작동 원리:</strong> 다주택자 매물이 집중되는 대단지에서는 유예 마감(5/9) 임박 시점에 매도자들이 계약 성사를 위해 <strong>호가를 실거래가보다 먼저 공격적으로 인하</strong>하고, 5/9 마감 직후 급매가 소진되자마자 <strong>최저호가가 실거래가보다 3~4주 먼저 튀어 오르는 선행성</strong>을 보였습니다.</li>
+          <li><strong>실증 근거 (잠실엘스):</strong> 실거래가가 4/4 31.0억에 찍힌 뒤 5/2 <strong>최저매매호가는 27.0억(-12.6%)</strong>까지 선행 급락했으나, 중과 시행 직후인 <strong>5/25 최저호가가 29.9억(+10.7%)으로 즉각 반등</strong>했습니다. 반면 84㎡ 실거래 중앙값은 5월 후반까지 32.8억에 머물다가 <strong>6월(33.8억)에야 후행 반등</strong>했습니다.</li>
+          <li><strong>실증 근거 (성복역롯데캐슬):</strong> 3/11 실거래(17.4억) 당시 최저호가가 16.0→15.8억으로 먼저 내려가며 4/8 실거래 하락(15.4억)을 예고했고, 5/25 최저호가 반등(16.5억) → 7/12 상향(17.5억)이 6~9월 실거래 연속 상승(16.95→18.4억)을 이끌었습니다.</li>
+        </ul>
+      </div>
+
+
+      <div class="pattern-card">
+        <h3>패턴 ② 전세호가 선행 · 매매 실거래 견인형 (매매 최저호가는 경직적이나 전세 급등이 선행)</h3>
+        <p><span class="tag tag-green">대표 단지: 리센츠, 광교중흥S-클래스, 고덕그라시움</span></p>
+        <ul>
+          <li><strong>작동 원리:</strong> 다주택자 규제와 실거주 요건 강화로 임대 물량이 급감하면서, 매매 최저호가가 움직이기 전에 <strong>84㎡ 전세호가가 먼저 급등해 매매 하방 경직성을 만들고 실거래가를 밀어 올리는 구조</strong>입니다.</li>
+          <li><strong>실증 근거 (리센츠):</strong> 매매 최저호가는 4/4 32.4억 → 5/25 32.5억 → 7/12 32.9억으로 변동폭(+1.5%)이 매우 작았으나, <strong>84㎡ 전세호가가 3/21 11.9억 → 5/2 13.45억(+13.0%) → 7/12 13.95억(+17.2%)으로 선행 급등</strong>하면서 매매 실거래 중앙값을 5월 전반 33.5억 → 5월 후반 34.1억 → 6~7월 34.95억(최고 37.0억)으로 끌어올렸습니다.</li>
+          <li><strong>실증 근거 (광교중흥S-클래스):</strong> 전세호가가 3/21 8.8억 → 4/4 10.0억 → 5/25 11.0억으로 먼저 오른 뒤, 6월부터 매매 실거래가(18.4→18.95→19.5→19.9억)가 당시 최저호가(18.0억)를 오히려 웃돌며(오버슈팅) 체결되었습니다.</li>
+        </ul>
+      </div>
+
+
+      <div class="pattern-card">
+        <h3>패턴 ③ 실거래가 선행 · 최저호가 후행 점프형 (급매 흡수 후 호가가 뒤늦게 추격)</h3>
+        <p><span class="tag tag-warn">대표 단지: 헬리오시티, 올림픽파크포레온, 신정마을1단지(59㎡), 주공9단지</span></p>
+        <ul>
+          <li><strong>작동 원리:</strong> ① 15억 이하 주담대(최대 6억)가 나오는 중저가 실수요 단지(신정1·주공9)나 ② 세대수가 9,500~12,000세대에 달해 마감 전후 잔여 매물 소화 시간이 걸린 초대형 단지(헬리오·포레온)에서는 <strong>실거래가가 먼저 반등한 뒤 최저호가가 3~6주 뒤에 계단식으로 점프</strong>했습니다.</li>
+          <li><strong>실증 근거 (헬리오시티):</strong> 5/10 중과 재개 직후 <strong>5월 후반(5/10~31) 실거래 중앙값은 28.0억→28.6억으로 먼저 반등</strong>했으나, 최저호가는 5/25 26.2억까지 오히려 내려갔다가 <strong>7/12에야 28.5억(+8.8%)으로 후행 점프</strong>했습니다.</li>
+          <li><strong>실증 근거 (신정마을1단지 59㎡):</strong> 최저호가가 4~5월 내내 11.2~11.5억에 묶여 있는 동안 실거래가가 4/9 11.8억 → <strong>5/6 12.5억으로 호가를 1억 원 웃돌며 선행 체결</strong>되었고, 7/12 시트에야 최저호가가 12.5억으로 따라붙었습니다.</li>
+        </ul>
+      </div>
+
+
+      <div class="pattern-card">
+        <h3>패턴 ④ 호가-실거래 괴리(Spread) 착시 및 이상치 주의형</h3>
+        <p><span class="tag tag-red">대표 단지: 산성역포레스티아, 위례중앙푸르지오1단지, 위례포레자이</span></p>
+        <ul>
+          <li><strong>전체 면적 최저호가 vs 전용 84㎡ 실거래 괴리:</strong> 엑셀 원자료의 <code>최저호가(전체)</code>는 소형 평형(59·74㎡)이나 1~2층 저층 매물이 포함될 수 있어, 전용 84㎡ 실거래가보다 구조적으로 1억~3억 원 낮게 표시되는 경향이 있습니다(예: 잠실엘스 84㎡ 실거래 33억대 vs 전체 최저호가 27~30.5억).</li>
+          <li><strong>호가 이상치 및 직거래 왜곡:</strong> <strong>산성역포레스티아</strong>의 5/25 최저호가 20.0억(직전 15억→직후 16억)은 일시적 평형/입력 이상치이며, <strong>위례중앙푸르지오1단지(5/30 15.3억)</strong>와 <strong>위례포레자이(4/23 10.5억)</strong>는 매도최저호가(각 22~23억, 16.5억)가 전혀 흔들리지 않은 상태에서 발생한 특수·직거래성 단건이므로 호가 붕괴로 해석하면 안 됩니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 4: POLICY IMPACT RANKING -->
+  <div class="section-card">
+    <h2>4. 다주택자 양도세 중과 유예 종료 정책 영향도 단지별 순위</h2>
+    <p class="section-sub">단순 가격 상승폭이 아니라 정책의 핵심 작동 경로인 <strong>「① 2/12 발표~5/9 마감 전 다주택 절세 급매 할인 폭 및 거래량 집중도 → ② 5/10 중과 시행 직후 매물 잠김 및 호가·실거래 V자 회복 탄력성」</strong>을 기준으로 산정한 단지별 영향도 순위입니다.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>순위</th>
+            <th>단지명 (권역·면적)</th>
+            <th>마감 전 절세 급매 할인 폭<br>(고점/연초 대비 저점)</th>
+            <th>마감 전 거래 집중도<br>(4월 ~ 5월 9일)</th>
+            <th>중과 시행(5/10) 이후<br>매물 잠김 및 반등 폭</th>
+            <th>비정책 교란 요인 및 종합 평가</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1위</strong></td>
+            <td><strong><a href="https://cy-on.kr/trades/8574/" target="_blank">올림픽파크포레온</a></strong><br>(강동 둔촌 · 84㎡)</td>
+            <td class="num"><span class="tag tag-red">-4.80억 (-15.0%)</span><br>25.10 32.0억 → 3/4 27.2억<br>(최저호가 26.8억)</td>
+            <td class="num">4월 9건 + 5월 25건<br>(마감 주말 단지 전체 40건+)</td>
+            <td class="num"><span class="tag tag-green">+4.10억 (+15.1%)</span><br>6/25 실거래 <strong>31.3억</strong><br>(전세호가 10→14억)</td>
+            <td>마감 직전 급매 할인폭과 마감 직후 V자 복원폭 모두 최대. 단, 2026년 이전고시·등기 절차 완료 효과가 일부 중첩됨.</td>
+          </tr>
+          <tr>
+            <td><strong>2위</strong></td>
+            <td><strong><a href="https://cy-on.kr/trades/7969/" target="_blank">잠실엘스</a></strong><br>(송파 잠실 · 84㎡)</td>
+            <td class="num"><span class="tag tag-red">-6.00억 (-16.2%)</span><br>2/20 37.0억 → 4/4 31.0억<br>(5/2 최저호가 27.0억)</td>
+            <td class="num">4월 25건 + 5/1~9 3건<br>(대량 손바뀜)</td>
+            <td class="num"><span class="tag tag-green">실거래 +2.80억 (+9.0%)</span><br>최저호가 5/25 <strong>29.9억(+10.7%)</strong><br>6~7월 실거래 <strong>33.8억</strong></td>
+            <td>비정책 교란 요인이 가장 적고, <strong>급매 할인 → 마감 직전 호가 바닥(27억) → 5/25 조기 호가 반등 → 6월 실거래 회복</strong>의 정책 가설에 가장 완벽히 부합.</td>
+          </tr>
+          <tr>
+            <td><strong>3위</strong></td>
+            <td><strong><a href="https://cy-on.kr/trades/7960/" target="_blank">리센츠</a></strong><br>(송파 잠실 · 84㎡)</td>
+            <td class="num"><span class="tag tag-red">급매 -5.00억 (-14.5%)</span><br>3/3 일반 34.4억 vs 2층 29.4억<br>(4월 중앙값 33.5억)</td>
+            <td class="num">4월 21건 + 5/1~9 9건<br>(총 30건 집중 소화)</td>
+            <td class="num"><span class="tag tag-green">중앙값 +1.45억 / 최고 +3.5억</span><br>5월후 34.1억 → 6~7월 <strong>34.95억</strong><br>(6/27 36.0억, 7월 최고 <strong>37.0억</strong>)</td>
+            <td>마감 전 30건 집중 거래로 다주택 물량 소화 후 6월10건→8월3건→9월2건으로 매물이 잠기며 전고점(34.4억)을 넘어 37.0억 신고가 경신.</td>
+          </tr>
+          <tr>
+            <td><strong>4위</strong></td>
+            <td><strong><a href="https://www.mk.co.kr/news/realestate/12106323" target="_blank">래미안원베일리</a></strong><br>(서초 반포 · 84㎡)</td>
+            <td class="num"><span class="tag tag-red">-8.00억 (-12.8%)</span><br>3/2 62.5억 → 4/10 3층 54.5억</td>
+            <td class="num">유예 마감일(5/9) 당일<br>57.5억·59.0억 2건 막판 체결</td>
+            <td class="num"><span class="tag tag-green">저층대비 +2.80억</span><br>5/12 2층 53.5억 → 6/24 20층 <strong>56.3억</strong><br>(서초구 매물 -15.49% 급감)</td>
+            <td>초고가 다주택자의 세금 회피 효과가 가장 극단적으로 나타난 단지(마감일 당일 59억 계약 후 매물 잠김).</td>
+          </tr>
+          <tr>
+            <td><strong>5위</strong></td>
+            <td><strong><a href="https://cy-on.kr/trades/8014/" target="_blank">헬리오시티</a></strong><br>(송파 가락 · 84㎡)</td>
+            <td class="num"><span class="tag tag-warn">최저호가 26.2억까지 조정</span><br>4/9 28.4억 → 5/1 27.97억</td>
+            <td class="num">4월 25건 + 5/1~9 11건<br>(총 36건 대량 소화)</td>
+            <td class="num"><span class="tag tag-green">+2.58억 (+9.2%)</span><br>5월후 28.6억 → 7월 <strong>30.0억</strong> → 9월 <strong>30.55억</strong><br>(7/12 최저호가 28.5억 +8.8%)</td>
+            <td>9,510세대 매물 소화 시간 때문에 호가는 5/25(26.2억)까지 눌렸으나, 중과 후 7~9월에 30억대를 돌파한 대표적인 중·후기 강세 단지.</td>
+          </tr>
+          <tr>
+            <td><strong>6위</strong></td>
+            <td><strong><a href="https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운" target="_blank">성복역롯데캐슬골드타운</a></strong><br>(용인 수지 · 84㎡)</td>
+            <td class="num"><span class="tag tag-red">-2.00억 (-11.5%)</span><br>3/11 17.4억 → 4/8 15.4억<br>(4월 중앙값 15.5억)</td>
+            <td class="num">4월 7건 + 5/1~9 3건 소화</td>
+            <td class="num"><span class="tag tag-green">+3.00억 (+19.5%)</span><br>5월후 16.9억 → 6월 16.95억(12건)<br>→ 7월 17.93억 → 9월 <strong>18.40억</strong></td>
+            <td>4월 절세 급매 저점(15.4억) 대비 9월(18.4억) 상승률은 +19.5%로 최상위이나, <strong>용인 수지 리모델링(초입·보원) 이주 수요</strong>가 크게 중첩됨.</td>
+          </tr>
+          <tr>
+            <td><strong>7위</strong></td>
+            <td><strong><a href="https://www.jipgap.com/complex/41117/광교중흥에스클래스" target="_blank">광교중흥S-클래스</a></strong><br>(수원 영통 · 84㎡)</td>
+            <td class="num"><span class="tag tag-warn">-0.60억 소폭 눌림</span><br>4/7 17.8억 → 5/21 17.2억<br>(5/1~9 중앙값 17.1억)</td>
+            <td class="num">4월 5건 + 5월 6건 집중 소화</td>
+            <td class="num"><span class="tag tag-green">+2.70억 (+15.7%)</span><br>6월 <strong>18.4억</strong> → 7월 18.95억<br>→ 8월 19.5억 → 9월 <strong>19.90억</strong></td>
+            <td>4~5월 절세 매물 소화 직후 거래량이 줄면서(6월 3건, 7월 2건) 가격이 17.2억→19.9억으로 급등. 하반기 영통구 직주근접 강세 중첩.</td>
+          </tr>
+          <tr>
+            <td><strong>8위</strong></td>
+            <td><strong><a href="https://cy-on.kr/trades/7961/" target="_blank">파크리오</a> · <a href="https://cy-on.kr/trades/7945/" target="_blank">트리지움</a></strong><br>(송파 신천·잠실 · 84㎡)</td>
+            <td class="num">파크리오 5/1~9 27.95억<br>트리지움 4월 31.0억</td>
+            <td class="num">파크리오 4~5월초 30건<br>트리지움 4~5월초 23건</td>
+            <td class="num"><span class="tag tag-green">파크리오 +2.80억 (+10.0%)</span><br>파크리오 6월 29.6억 → 9월 <strong>30.75억</strong><br>트리지움 5월후 32.1억 → 8월 <strong>32.2억</strong></td>
+            <td>잠실엘스·리센츠와 함께 4~5월 초 절세 매물을 대량 흡수한 뒤 5월 후반~6월에 일제히 계단식 반등에 성공.</td>
+          </tr>
+          <tr>
+            <td><strong>9위</strong></td>
+            <td><strong><a href="https://apthi.kr/apttrade/411316951/202602" target="_blank">산성역포레스티아</a> · <a href="https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스" target="_blank">광교자이더클래스</a></strong></td>
+            <td class="num">산성 25.08 14.8억 → 3/1 13.5억<br>광교자이 5월 중앙 14.5억</td>
+            <td class="num">산성 4~5월 10건 소화<br>광교자이 4~5월 5건</td>
+            <td class="num"><span class="tag tag-green">산성 +3.3억 / 광교자이 +1.9억</span><br>산성 6/20 <strong>17.0억</strong>(8월 16.8억)<br>광교자이 8월 <strong>16.4억</strong>(9월 16.15억)</td>
+            <td>중저가·준상급지 대단지로 유예 마감 전 급매 소화 후 6~8월에 뚜렷한 우상향 궤적 형성.</td>
+          </tr>
+          <tr>
+            <td><strong>10위</strong></td>
+            <td><strong><a href="https://kbland.kr/se/c/34391" target="_blank">고덕그라시움</a> · <a href="https://aptmap.net/apt/8943" target="_blank">고덕아르테온</a></strong><br>(강동 고덕·상일 · 84㎡)</td>
+            <td class="num">그라시움 4월 25.1억 → 5/22 23.6억<br>아르테온 4월 21.5억</td>
+            <td class="num">그라시움 5월 5건<br>아르테온 4~5월 9건</td>
+            <td class="num"><span class="tag tag-blue">그라시움 +1.6억 / 아르테온 +1.85억</span><br>그라시움 6월말 25.0~25.45억<br>아르테온 8월 <strong>23.35억</strong></td>
+            <td>매매 직접 반등폭보다 강동구 전세 급등(KB 전세지수 +7.96%)이 하방을 강하게 지지하며 완만하게 회복.</td>
+          </tr>
+          <tr>
+            <td><strong>11위<br>(비규제/대출선행)</strong></td>
+            <td><strong><a href="https://biz.heraldcorp.com/article/10899528" target="_blank">동탄역롯데캐슬</a> · <a href="https://www.jipgap.com/complex/41465/신정마을주공1" target="_blank">신정1(59㎡)</a> · <a href="https://www.jipgap.com/complex/41465/e%ED%8E%B8%ED%95%9C%EC%84%B8%EC%83%81%EC%88%98%EC%A7%80" target="_blank">e편한수지</a> · <a href="https://cheongyak.com/sold/11809" target="_blank">파크뷰</a></strong></td>
+            <td class="num">마감 전 급매 조정 없이<br>연초부터 지속 상승</td>
+            <td class="num">실수요·대체수요 거래 지속</td>
+            <td class="num">동탄롯데 2월 18.8억 → 6/4 <strong>22.25억</strong><br>신정1 1월 10.48억 → 8월 <strong>12.85억</strong><br>파크뷰 2월 21.5억 → 4월 <strong>26.5억</strong></td>
+            <td>5월 양도세 중과 직접 타격(급매 출회)보다는 <strong>비규제 풍선효과(동탄, 7/1 후속규제)</strong> 및 <strong>15억 이하 주담대 6억 한도 실수요(신정1·e편한수지)</strong>가 주도.</td>
+          </tr>
+          <tr>
+            <td><strong>12위<br>(약한반응/제약)</strong></td>
+            <td><strong>신정7단지상록 · 위례3개단지 · 자연앤자이1(116㎡) · 기타</strong></td>
+            <td class="num">거래 표본 극소 또는<br>호가 고정(신정7 13.5억)</td>
+            <td class="num">월 0~2건 소수 거래</td>
+            <td class="num">신정7 8월 14.45억 완만 상승<br>자연앤1 9월 19.875억(2건)<br>위례 9월 매매 공백</td>
+            <td>거주의무 제약(위례자이더시티), 교통 시차(위례), 대형 평형 표본 한계(자연앤 116㎡) 등으로 정책 직접 반응이 미약하거나 관측이 제한됨.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- SECTION 5: OPTIMAL BUYING DECISION UNDER SINGLE POLICY VARIABLE -->
+  <div class="section-card" style="border: 2px solid #1e40af; background: #f8fbff;">
+    <h2>5. [핵심 판단] 정책 발표 시점(2026.01~02) 기준, 변수를 '양도세 중과 정책 여부'만으로 봤을 때 어떤 아파트를 매수하는 게 유리했는가?</h2>
+    <p class="section-sub">지역별 개발 호재(반도체·GTX), 리모델링 이주 수요(수지), 15억 이하 대출 한도 효과 등 <strong>비정책 변수를 모두 배제(통제)</strong>하고, 오직 <strong>「다주택자 양도세 중과 유예 종료(5/9) 및 정부 보완방안」이라는 단일 정책 변수</strong>만 놓고 판단한 최적 매수 의사결정 분석입니다.</p>
+
+
+    <div class="grid-2" style="margin-bottom: 18px;">
+      <div class="pattern-card" style="border-left: 4px solid #1e40af;">
+        <h3>① 정책 단일 변수가 만든 '수익 창출 공식'</h3>
+        <ul>
+          <li><strong>세금 회피용 강제 할인(Forced Discount):</strong> 조정대상지역 다주택자는 5월 9일까지 계약하지 못하면 기본세율(6~45%)에 +20~30%p 중과 및 장기보유특별공제(최대 30%) 배제로 양도세율이 최고 82.5%(지방세 포함)까지 폭증합니다. 예를 들어 차익 12억 원인 3주택자는 양도세가 4억 원에서 9.4억 원으로 +5.4억 원 늘어납니다(<a href="https://www.donga.com/news/Economy/article/all/20260507/133881559/1" target="_blank">동아일보 5/7 보도</a>).</li>
+          <li><strong>따라서 다주택자의 합리적 선택은</strong> 5월 9일 이전에 시세보다 <strong>3억~5억 원을 낮춰서라도 급매로 던지는 것</strong>이었고, 이것이 3월 초~4월 중순 상급지 대단지에 나타난 <strong>-10% ~ -16% 일시적 가격 왜곡(Dip)</strong>의 순수한 정책 원인입니다.</li>
+          <li><strong>제도적 보완책(실거주·잔금 유예)의 레버리지:</strong> 정부는 2/12 및 3/16 보완책을 통해 5/9까지 계약 시 <strong>잔금 기한을 4~6개월 유예</strong>하고, 토지거래허가구역 내에서도 무주택자가 다주택자의 <strong>'세 낀 매물'을 매수할 경우 임차인 만기(최장 2년)까지 실거주 의무를 유예</strong>해 주었습니다.</li>
+        </ul>
+      </div>
+
+
+      <div class="pattern-card" style="border-left: 4px solid #dc2626;">
+        <h3>② 왜 '연초부터 계속 오른 단지(동탄·신정1)'가 아니라 '급매가 쏟아진 상급지 대단지'인가?</h3>
+        <ul>
+          <li><strong>비정책 변수 제거 시의 차이:</strong> 단순 기간 수익률만 보면 동탄역롯데캐슬(18.8→22.25억)이나 성복역롯데캐슬(15.4→18.4억), 신정마을1단지(10.48→12.85억)도 높아 보이지만, 동탄은 5월 당시 <strong>비규제지역(양도세 중과 대상 아님)</strong>이었고 성복·신정1은 <strong>수지 리모델링 이주 수요와 15억 이하 주담대(6억) 효과</strong>가 결합된 결과입니다.</li>
+          <li><strong>순수 정책 알파(Policy Alpha):</strong> 반면 <strong>올림픽파크포레온·잠실엘스·리센츠·헬리오시티·파크리오</strong>는 정책 발표 직후 다주택 절세 물량이 실제로 쏟아지며 시세가 <strong>-2.5억~-6.0억 원 인위적으로 눌렸다가, 5월 10일 중과 시행으로 매물이 잠기면서 눌렸던 폭만큼 즉시 복원(Mean Reversion)</strong>되었습니다. 즉 다른 거시 변수가 없더라도 <strong>'정책의 시작(급매 출회)과 끝(매물 잠김)'만으로 가장 확실한 안전마진(Margin of Safety)을 제공한 아파트</strong>가 최적 매수처입니다.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>매수 추천 순위<br>(정책 단일변수 기준)</th>
+            <th>최적 매수 아파트 단지</th>
+            <th>최적 매수 타이밍 및 매수가<br>(절세 급매 골든타임)</th>
+            <th>중과 시행 후 복원 시세<br>(2026년 6~9월)</th>
+            <th>순수 정책 차익<br>(할인폭 복원 이익)</th>
+            <th>정책 단일 변수 기준 유리했던 핵심 이유</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>최우수 1순위</strong></td>
+            <td><strong><a href="https://cy-on.kr/trades/8574/" target="_blank">올림픽파크포레온</a></strong><br>(강동구 둔촌동 · 84㎡)</td>
+            <td class="num">2026년 3월 초 ~ 4월 하순<br><strong>27.2억 ~ 27.5억</strong><br>(최저호가 26.8억)</td>
+            <td class="num">6월 <strong>31.3억</strong><br>7~8월 30.0~30.5억</td>
+            <td class="num"><span class="tag tag-green">+3.8억 ~ +4.1억</span><br>(+14.0% ~ +15.1%)</td>
+            <td>25년 10월 이미 32.0억에 검증된 신축 대단지였으나, 양도세 중과 회피 매물이 1만 2천 세대 규모에서 일시에 출회되며 <strong>전고점 대비 -4.8억 원 할인된 가격에 매수</strong>할 수 있었고, 5/9 마감 직후 매물이 -19.1% 급감하며 45일 만에 31.3억으로 복원됨.</td>
+          </tr>
+          <tr>
+            <td><strong>최우수 2순위</strong></td>
+            <td><strong><a href="https://cy-on.kr/trades/7969/" target="_blank">잠실엘스</a> · <a href="https://cy-on.kr/trades/7960/" target="_blank">리센츠</a></strong><br>(송파구 잠실동 · 84㎡)</td>
+            <td class="num">2026년 3월 하순 ~ 4월 초<br>엘스 <strong>31.0억 ~ 31.5억</strong><br>리센츠 <strong>29.4억(2층) ~ 33.5억</strong></td>
+            <td class="num">엘스 6~7월 <strong>33.8억</strong><br>리센츠 6~7월 <strong>34.95억</strong><br>(최고 36.0~37.0억)</td>
+            <td class="num"><span class="tag tag-green">엘스 +2.3억 ~ +2.8억</span><br><span class="tag tag-green">리센츠 +1.5억 ~ +5.5억</span></td>
+            <td>원래 토지거래허가구역이라 갭투자가 불가능했으나, <strong>정부 보완방안(무주택자가 다주택 세 낀 매물 매수 시 실거주 유예 + 잔금 4개월 유예)</strong> 덕분에 전세(11~13.5억)를 끼고 다주택 급매를 시세 대비 3억~5억 원 싸게 인수할 수 있었던 최대 정책 수혜지.</td>
+          </tr>
+          <tr>
+            <td><strong>우수 3순위</strong></td>
+            <td><strong><a href="https://cy-on.kr/trades/8014/" target="_blank">헬리오시티</a> · <a href="https://cy-on.kr/trades/7961/" target="_blank">파크리오</a></strong><br>(송파구 가락·신천동 · 84㎡)</td>
+            <td class="num">2026년 4월 ~ 5월 9일 직전<br>헬리오 <strong>27.97억 ~ 28.0억</strong><br>파크리오 <strong>27.95억 ~ 28.0억</strong></td>
+            <td class="num">헬리오 7~9월 <strong>30.0~30.55억</strong><br>파크리오 6~9월 <strong>29.6~30.75억</strong></td>
+            <td class="num"><span class="tag tag-green">헬리오 +2.58억 (+9.2%)</span><br><span class="tag tag-green">파크리오 +2.80억 (+10.0%)</span></td>
+            <td>4월~5월 9일 사이 각 36건·30건의 다주택 절세 매물이 쏟아져 <strong>매수자 우위 시장에서 로열동·중고층 급매를 28억 선에 골라 잡을 수 있었고</strong>, 마감 후 전세가 상승과 매물 잠김으로 30억 중반에 안착함.</td>
+          </tr>
+          <tr>
+            <td><strong>우수 4순위<br>(경기 상급지)</strong></td>
+            <td><strong><a href="https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운" target="_blank">성복역롯데캐슬골드타운</a> · <a href="https://www.jipgap.com/complex/41117/광교중흥에스클래스" target="_blank">광교중흥S-클래스</a></strong><br>(수지·광교 · 84㎡)</td>
+            <td class="num">2026년 4월 초 ~ 5월 초<br>성복 <strong>15.4억 ~ 15.5억</strong>(4/8)<br>광교중흥 <strong>17.1억 ~ 17.2억</strong>(5월초)</td>
+            <td class="num">성복 6월 16.95억 → 9월 <strong>18.4억</strong><br>중흥 6월 18.4억 → 9월 <strong>19.9억</strong></td>
+            <td class="num"><span class="tag tag-green">성복 +3.00억 (+19.5%)</span><br><span class="tag tag-green">중흥 +2.70억 (+15.7%)</span><br>(순수 정책할인분 각 +1.5억)</td>
+            <td>이주 수요 등 외부 변수를 차감하더라도, 3월(성복 17.4억, 중흥 17.8억) 대비 <strong>4월~5월 초 다주택 절세 매물 출회로 일시 눌렸던 15.4억(성복)·17.1억(중흥) 구간</strong>이 연중 유일한 저점 매수 기회였음(신규 규제지역 잔금 6개월 유예 혜택 적용).</td>
+          </tr>
+          <tr>
+            <td><strong>보완 5순위<br>(15억이하 중저가)</strong></td>
+            <td><strong><a href="https://apthi.kr/apttrade/411316951/202602" target="_blank">산성역포레스티아</a></strong><br>(성남 수정구 · 84㎡)</td>
+            <td class="num">2026년 3월 초<br><strong>13.5억</strong> (3/1 급매)</td>
+            <td class="num">6월 <strong>15.9억(최고 17.0억)</strong><br>8월 <strong>16.8억</strong></td>
+            <td class="num"><span class="tag tag-green">+2.4억 ~ +3.3억</span><br>(+17.8% ~ +24.4%)</td>
+            <td>25년 8월 14.8억이던 단지가 연초 양도세 중과 유예 종료 발표 직후인 3/1에 <strong>13.5억(최저호가 13.5억)</strong>으로 급매 출회되었고,同時에 15억 이하 주담대(최대 6억) 혜택까지 활용할 수 있어 소액 자기자본 매수자에게 가장 유리했음.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- SECTION 6: FULL EXPANDED DATA TABLE (2025.06 ~ 2026.09) -->
+  <div class="section-card">
+    <h2>6. 2025년 6월 ~ 2026년 9월 확장 실거래가 · 호가 통합 데이터셋 (총 178건)</h2>
+    <p class="section-sub">재테크 스터디 폴더에 업데이트된 <a href="https://drive.google.com/drive/folders/19CspxxQS1PQEy4p-9d79Re2k96lpTtyF" target="_blank">CSV 파일</a>의 전체 레코드입니다. 권역·국면·단지명으로 실시간 검색 및 필터링할 수 있습니다.</p>
+
+
+    <div class="filter-bar">
+      <input type="text" id="searchInput" placeholder="단지명, 법정동, 해석 키워드 검색 (예: 잠실엘스, 급매, 선행)..." style="flex:1;min-width:240px;">
+      <select id="regionSelect">
+        <option value="ALL">전체 권역 보기</option>
+        <option value="강남3구(송파)">강남3구 (송파)</option>
+        <option value="강남3구(서초)">강남3구 (서초)</option>
+        <option value="강남3구(강남)">강남3구 (강남)</option>
+        <option value="강동">강동구</option>
+        <option value="수지">용인 수지 (성복·신정·상현)</option>
+        <option value="광교">수원 광교 (영통)</option>
+        <option value="성남수정">성남 수정구</option>
+        <option value="분당">성남 분당구</option>
+        <option value="판교">성남 판교</option>
+        <option value="위례">위례권 (송파·하남·성남)</option>
+        <option value="동탄">화성 동탄</option>
+        <option value="기흥">용인 기흥</option>
+        <option value="하남">하남 미사</option>
+      </select>
+      <select id="phaseSelect">
+        <option value="ALL">전체 정책 국면 보기</option>
+        <option value="00_">00. 정책발표전 25년하반기 (25.06~12)</option>
+        <option value="01_">01. 연초 정책언급전 (26.01.01~01.22)</option>
+        <option value="02_">02. 연장불가시사~발표전 (26.01.23~02.11)</option>
+        <option value="03_">03. 종료확정~유예마감 (26.02.12~05.09 급매기)</option>
+        <option value="04_">04. 중과재개 초기 (26.05.10~06.30 반등기)</option>
+        <option value="05_">05. 중과재개 중후기 (26.07.01~09.30)</option>
+      </select>
+    </div>
+
+
+    <div class="table-scroll" style="max-height: 620px; overflow-y: auto;">
+      <table>
+        <thead style="position: sticky; top: 0; z-index: 2;">
+          <tr>
+            <th>계약/기준일</th>
+            <th>연월/주차</th>
+            <th>정책 국면</th>
+            <th>권역</th>
+            <th>단지명</th>
+            <th>면적(㎡)</th>
+            <th class="num">실거래가(억)</th>
+            <th class="num">매도최저호가(억)</th>
+            <th class="num">84전세호가(억)</th>
+            <th class="num">실거래-호가괴리</th>
+            <th>거래건수/층</th>
+            <th>호가·실거래 관계 및 정책 반응 해설</th>
+            <th>출처</th>
+          </tr>
+        </thead>
+        <tbody id="dataTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const COMPLEXES = [{"id": "foreon", "name": "올림픽파크포레온 (강동 84㎡)", "region": "강동구", "color": "#dc2626", "rank": "정책영향 1위 (최대 급매할인·V자복원)", "tx": [{"d": "2025-10-19", "p": 32.0, "note": "25.10 전고점(32.0억)"}, {"d": "2026-03-04", "p": 27.2, "note": "절세급매 저점(-4.8억)"}, {"d": "2026-04-22", "p": 27.5, "note": "4월 9건(중앙 27.55억)"}, {"d": "2026-05-09", "p": 28.0, "note": "5월 25건 완판(평균 27.82억)"}, {"d": "2026-06-25", "p": 31.3, "note": "6월 +3.8억 V자 급반등"}, {"d": "2026-07-31", "p": 30.0, "note": "7월 1건(30.0억)"}, {"d": "2026-08-22", "p": 30.5, "note": "8월 5건(8/22 30.5억)"}, {"d": "2026-09-30", "p": 28.9, "note": "9월 1건(28.9억)"}], "ask": [{"d": "2026-03-21", "p": 26.8, "note": "3/21 최저호가 26.8억"}, {"d": "2026-04-04", "p": 26.8, "note": "4/4 최저호가 26.8억"}, {"d": "2026-04-18", "p": 27.0, "note": "4/18 최저호가 27.0억"}, {"d": "2026-05-02", "p": 27.5, "note": "5/2 최저호가 27.5억"}, {"d": "2026-05-25", "p": 27.4, "note": "5/25 최저호가 27.4억"}, {"d": "2026-07-12", "p": 29.0, "note": "7/12 최저호가 29.0억"}], "jeonse": [{"d": "2026-03-21", "p": 9.9, "note": "3/21 전세호가 9.9억"}, {"d": "2026-04-04", "p": 9.85, "note": "4/4 전세호가 9.85억"}, {"d": "2026-05-02", "p": 10.0, "note": "5/2 전세호가 10.0억"}, {"d": "2026-05-25", "p": 10.0, "note": "5/25 전세호가 10.0억"}, {"d": "2026-07-12", "p": 14.0, "note": "7/12 전세호가 14.0억 급등"}]}, {"id": "els", "name": "잠실엘스 (송파 84㎡)", "region": "송파구", "color": "#2563eb", "rank": "정책영향 2위 (최저호가 조기선행 표본)", "tx": [{"d": "2025-06-05", "p": 31.5, "note": "25.06 실거래 31.5억"}, {"d": "2025-08-24", "p": 32.2, "note": "25.08 실거래 32.2억"}, {"d": "2025-09-26", "p": 32.75, "note": "25.09 실거래 32.75억"}, {"d": "2025-11-10", "p": 33.0, "note": "25.11 실거래 33.0억"}, {"d": "2026-02-20", "p": 37.0, "note": "26.02 상반기 고점 37.0억"}, {"d": "2026-03-01", "p": 34.2, "note": "3/1 34.2억"}, {"d": "2026-03-28", "p": 31.5, "note": "3/28 급매 31.5억"}, {"d": "2026-04-04", "p": 31.0, "note": "4/4 급매 저점 31.0억(4월 중앙 32.9억)"}, {"d": "2026-05-09", "p": 33.0, "note": "5/1~9 중앙값 33.0억(3건)"}, {"d": "2026-05-19", "p": 32.8, "note": "5/10~31 중앙값 32.8억(7건)"}, {"d": "2026-06-24", "p": 33.8, "note": "6월 중앙값 33.8억(5건)"}, {"d": "2026-07-31", "p": 33.8, "note": "7월 중앙값 33.8억(15건)"}, {"d": "2026-08-31", "p": 33.5, "note": "8월 중앙값 33.5억(3건)"}, {"d": "2026-09-30", "p": 33.25, "note": "9월 중앙값 33.25억(3건)"}], "ask": [{"d": "2026-04-04", "p": 30.5, "note": "4/4 최저호가 30.5억"}, {"d": "2026-04-18", "p": 30.9, "note": "4/18 최저호가 30.9억"}, {"d": "2026-05-02", "p": 27.0, "note": "5/2 최저호가 27.0억 선행바닥"}, {"d": "2026-05-25", "p": 29.9, "note": "5/25 최저호가 29.9억(+10.7% 선행반등)"}, {"d": "2026-07-12", "p": 32.0, "note": "7/12 최저호가 32.0억"}], "jeonse": [{"d": "2026-03-21", "p": 9.95, "note": "3/21 전세호가 9.95억"}, {"d": "2026-04-04", "p": 10.8, "note": "4/4 전세호가 10.8억"}, {"d": "2026-04-18", "p": 11.2, "note": "4/18 전세호가 11.2억"}, {"d": "2026-05-02", "p": 12.5, "note": "5/2 전세호가 12.5억"}, {"d": "2026-05-25", "p": 11.95, "note": "5/25 전세호가 11.95억"}, {"d": "2026-07-12", "p": 12.9, "note": "7/12 전세호가 12.9억"}]}, {"id": "ricenz", "name": "리센츠 (송파 84㎡)", "region": "송파구", "color": "#0284c7", "rank": "정책영향 3위 (전세선행·중과후 신고가)", "tx": [{"d": "2026-02-28", "p": 33.8, "note": "2/28 33.8억"}, {"d": "2026-03-03", "p": 34.4, "note": "3/3 34.4억(2층 급매 29.4억 별도)"}, {"d": "2026-04-30", "p": 33.5, "note": "4월 21건 중앙값 33.5억"}, {"d": "2026-05-09", "p": 33.5, "note": "5/1~9 9건 중앙값 33.5억"}, {"d": "2026-05-31", "p": 34.1, "note": "5/10~31 6건 중앙값 34.1억"}, {"d": "2026-06-29", "p": 34.95, "note": "6월 10건 중앙값 34.95억(6/27 36.0억)"}, {"d": "2026-07-31", "p": 34.95, "note": "7월 8건 중앙값 34.95억(최고 37.0억)"}, {"d": "2026-08-31", "p": 34.65, "note": "8월 3건 중앙값 34.65억"}, {"d": "2026-09-30", "p": 34.8, "note": "9월 2건 중앙값 34.80억"}], "ask": [{"d": "2026-03-21", "p": 30.0, "note": "3/21 최저호가 30.0억"}, {"d": "2026-04-04", "p": 32.4, "note": "4/4 최저호가 32.4억"}, {"d": "2026-05-02", "p": 32.4, "note": "5/2 최저호가 32.4억"}, {"d": "2026-05-25", "p": 32.5, "note": "5/25 최저호가 32.5억"}, {"d": "2026-07-12", "p": 32.9, "note": "7/12 최저호가 32.9억"}], "jeonse": [{"d": "2026-03-21", "p": 11.9, "note": "3/21 전세호가 11.9억"}, {"d": "2026-04-04", "p": 12.0, "note": "4/4 전세호가 12.0억"}, {"d": "2026-04-18", "p": 12.45, "note": "4/18 전세호가 12.45억"}, {"d": "2026-05-02", "p": 13.45, "note": "5/2 전세호가 13.45억 선행급등"}, {"d": "2026-05-25", "p": 13.5, "note": "5/25 전세호가 13.5억"}, {"d": "2026-07-12", "p": 13.95, "note": "7/12 전세호가 13.95억"}]}, {"id": "onebailey", "name": "래미안원베일리 (서초 84㎡)", "region": "서초구", "color": "#7c3aed", "rank": "정책영향 4위 (초고가 절세급매·마감일 체결)", "tx": [{"d": "2025-06-15", "p": 63.0, "note": "25.06 월중위 63.0억"}, {"d": "2026-03-02", "p": 62.5, "note": "3/2 62.5억"}, {"d": "2026-04-10", "p": 54.5, "note": "4/10 3층 절세급매 54.5억(-8억)"}, {"d": "2026-05-09", "p": 59.0, "note": "5/9 유예마감일 57.5억·59.0억 2건"}, {"d": "2026-05-12", "p": 53.5, "note": "5/12 2층 53.5억"}, {"d": "2026-06-24", "p": 56.3, "note": "6/24 20층 56.3억 회복"}], "ask": [{"d": "2026-03-07", "p": 41.0, "note": "3/7 전체최저호가 41.0억(소형포함)"}, {"d": "2026-05-09", "p": 50.0, "note": "5월 84㎡ 최저호가 50.0억"}, {"d": "2026-06-24", "p": 53.5, "note": "6월 이후 84㎡ 최저호가 53.5억"}], "jeonse": [{"d": "2026-03-07", "p": 18.0, "note": "전세 시세 약 18.0억"}]}, {"id": "helio", "name": "헬리오시티 (송파 84㎡)", "region": "송파구", "color": "#0d9488", "rank": "정책영향 5위 (마감전 36건 대량소화·후기반등)", "tx": [{"d": "2026-04-09", "p": 28.0, "note": "4월 25건 중앙값 28.0억(4/9 28.4억)"}, {"d": "2026-05-01", "p": 27.97, "note": "5/1 27.97억(5/1~9 11건 중앙 28.0억)"}, {"d": "2026-05-31", "p": 28.6, "note": "5/10~31 6건 중앙값 28.6억 선행반등"}, {"d": "2026-06-30", "p": 28.2, "note": "6월 7건 중앙값 28.2억"}, {"d": "2026-07-04", "p": 29.0, "note": "7/4 29.0억"}, {"d": "2026-07-31", "p": 30.0, "note": "7월 3건 중앙값 30.0억 돌파"}, {"d": "2026-08-31", "p": 29.0, "note": "8월 3건 중앙값 29.0억"}, {"d": "2026-09-30", "p": 30.55, "note": "9월 1건 30.55억 신고가"}], "ask": [{"d": "2026-04-18", "p": 26.65, "note": "4/18 최저호가 26.65억"}, {"d": "2026-05-02", "p": 26.45, "note": "5/2 최저호가 26.45억"}, {"d": "2026-05-25", "p": 26.2, "note": "5/25 최저호가 26.2억(후행바닥)"}, {"d": "2026-07-12", "p": 28.5, "note": "7/12 최저호가 28.5억(+8.8% 점프)"}], "jeonse": [{"d": "2026-04-18", "p": 10.95, "note": "4/18 전세호가 10.95억"}, {"d": "2026-05-25", "p": 10.95, "note": "5/25 전세호가 10.95억"}, {"d": "2026-07-12", "p": 12.1, "note": "7/12 전세호가 12.1억"}]}, {"id": "seongbok", "name": "성복역롯데캐슬골드타운 (수지 84㎡)", "region": "용인 수지", "color": "#ea580c", "rank": "정책영향 6위 (4월 급매눌림 후 +19.5% 급등)", "tx": [{"d": "2025-10-15", "p": 15.8, "note": "25.10 약 15.8억"}, {"d": "2026-02-03", "p": 16.65, "note": "2/3 16.65억(2월 중앙 16.45억)"}, {"d": "2026-02-10", "p": 15.2, "note": "2/10 저층 급매 15.2억"}, {"d": "2026-03-11", "p": 17.4, "note": "3/11 17.4억"}, {"d": "2026-04-08", "p": 15.4, "note": "4/8 절세급매 저점 15.4억(4월 중앙 15.5억)"}, {"d": "2026-05-08", "p": 16.6, "note": "5/8 16.6억(5월 전반 16.3억)"}, {"d": "2026-05-31", "p": 16.9, "note": "5월 후반 4건 중앙값 16.9억"}, {"d": "2026-06-26", "p": 16.95, "note": "6월 12건 중앙값 16.95억(6/26 17.0억)"}, {"d": "2026-07-31", "p": 17.925, "note": "7월 6건 중앙값 17.925억"}, {"d": "2026-08-31", "p": 18.2, "note": "8월 5건 중앙값 18.20억"}, {"d": "2026-09-30", "p": 18.4, "note": "9월 18.40억(저점대비 +3.0억)"}], "ask": [{"d": "2026-03-07", "p": 16.0, "note": "3/7 최저호가 16.0억"}, {"d": "2026-04-04", "p": 15.8, "note": "4/4 최저호가 15.8억 선행하락"}, {"d": "2026-05-02", "p": 15.8, "note": "5/2 최저호가 15.8억"}, {"d": "2026-05-25", "p": 16.5, "note": "5/25 최저호가 16.5억 조기반등"}, {"d": "2026-07-12", "p": 17.5, "note": "7/12 최저호가 17.5억"}], "jeonse": [{"d": "2026-03-21", "p": 8.0, "note": "3/21 전세호가 8.0억"}, {"d": "2026-04-04", "p": 8.5, "note": "4/4 전세호가 8.5억"}, {"d": "2026-04-18", "p": 9.0, "note": "4/18 전세호가 9.0억"}, {"d": "2026-05-02", "p": 8.5, "note": "5/2 전세호가 8.5억"}, {"d": "2026-05-25", "p": 9.0, "note": "5/25 전세호가 9.0억"}, {"d": "2026-07-12", "p": 8.0, "note": "7/12 전세호가 8.0억(10월 실거래 9.5억)"}]}, {"id": "jungheung", "name": "광교중흥S-클래스 (광교 84㎡)", "region": "수원 영통", "color": "#16a34a", "rank": "정책영향 7위 (5월 매물소화 후 6~9월 +15.7%)", "tx": [{"d": "2025-09-02", "p": 16.8, "note": "25.09 약 16.8억"}, {"d": "2026-02-04", "p": 17.15, "note": "2/4 일반층 17.15억(조망고층 20.5억)"}, {"d": "2026-04-07", "p": 17.8, "note": "4/7 17.8억(4월 5건 중앙 17.5억)"}, {"d": "2026-05-08", "p": 17.55, "note": "5/8 41층 17.55억(5/1~9 중앙 17.1억)"}, {"d": "2026-05-21", "p": 17.2, "note": "5/21 17.2억(5월 6건 중앙 17.2억)"}, {"d": "2026-06-18", "p": 18.4, "note": "6월 3건 중앙값 18.4억(6/20 18.6억)"}, {"d": "2026-07-31", "p": 18.95, "note": "7월 2건 중앙값 18.95억"}, {"d": "2026-08-31", "p": 19.5, "note": "8월 3건 중앙값 19.50억"}, {"d": "2026-09-30", "p": 19.9, "note": "9월 1건 19.90억"}], "ask": [{"d": "2026-03-07", "p": 17.0, "note": "3/7 최저호가 17.0억"}, {"d": "2026-03-21", "p": 17.2, "note": "3/21 최저호가 17.2억"}, {"d": "2026-04-04", "p": 17.3, "note": "4/4 최저호가 17.3억"}, {"d": "2026-04-18", "p": 17.4, "note": "4/18~5/2 최저호가 17.4억"}, {"d": "2026-05-25", "p": 17.5, "note": "5/25 최저호가 17.5억"}, {"d": "2026-07-12", "p": 18.0, "note": "7/12 최저호가 18.0억"}], "jeonse": [{"d": "2026-03-21", "p": 8.8, "note": "3/21 전세호가 8.8억"}, {"d": "2026-04-04", "p": 10.0, "note": "4/4 전세호가 10.0억"}, {"d": "2026-05-25", "p": 11.0, "note": "5/25 전세호가 11.0억"}, {"d": "2026-07-12", "p": 10.0, "note": "7/12 전세호가 10.0억"}]}, {"id": "sanseong", "name": "산성역포레스티아 (성남수정 84㎡)", "region": "성남 수정", "color": "#9333ea", "rank": "정책영향 8위 (3월 13.5억 급매 후 17억 반등)", "tx": [{"d": "2025-08-25", "p": 14.8, "note": "25.08.25 14.8억"}, {"d": "2026-03-01", "p": 13.5, "note": "3/1 절세급매 13.5억"}, {"d": "2026-04-08", "p": 15.4, "note": "4월 중앙값 15.4억(특수 11.1억 별도)"}, {"d": "2026-05-25", "p": 15.2, "note": "5월 7건 중앙값 15.2억(평균 15.27억)"}, {"d": "2026-06-20", "p": 17.0, "note": "6/20 17.0억(6월 6건 중앙 15.9억)"}, {"d": "2026-07-31", "p": 15.775, "note": "7월 4건 중앙값 15.775억"}, {"d": "2026-08-31", "p": 16.8, "note": "8월 1건 16.80억"}], "ask": [{"d": "2026-03-07", "p": 13.5, "note": "3/7 최저호가 13.5억"}, {"d": "2026-03-21", "p": 15.5, "note": "3/21 최저호가 15.5억"}, {"d": "2026-04-04", "p": 15.1, "note": "4/4 최저호가 15.1억"}, {"d": "2026-04-18", "p": 15.3, "note": "4/18 최저호가 15.3억"}, {"d": "2026-05-02", "p": 15.0, "note": "5/2 최저호가 15.0억"}, {"d": "2026-05-25", "p": 20.0, "note": "5/25 최저호가 20.0억(대형/입력 이상치)"}, {"d": "2026-07-12", "p": 16.0, "note": "7/12 최저호가 16.0억 정상화"}], "jeonse": [{"d": "2026-03-21", "p": 8.0, "note": "3/21~5/2 전세호가 8.0억"}, {"d": "2026-07-12", "p": 6.8, "note": "7/12 전세호가 6.8억"}]}, {"id": "gwanggyo_xi", "name": "광교자이더클래스 (상현역 84㎡)", "region": "수지 상현", "color": "#0891b2", "rank": "정책영향 9위 (5월 14.5억 소화 후 8월 16.4억)", "tx": [{"d": "2026-01-24", "p": 14.17, "note": "1/24 14.17억"}, {"d": "2026-02-15", "p": 14.5, "note": "2/15 14.50억"}, {"d": "2026-04-16", "p": 14.85, "note": "4/16 14.85억(4월 중앙 14.92억)"}, {"d": "2026-05-25", "p": 14.5, "note": "5월 3건 중앙값 14.5억(5/25 단건 15.25억)"}, {"d": "2026-06-22", "p": 15.475, "note": "6월 4건 중앙값 15.475억(저층 단건 13.8억)"}, {"d": "2026-07-31", "p": 15.95, "note": "7월 3건 중앙값 15.95억"}, {"d": "2026-08-31", "p": 16.4, "note": "8월 3건 중앙값 16.40억"}, {"d": "2026-09-30", "p": 16.15, "note": "9월 2건 평균 16.15억"}], "ask": [{"d": "2026-03-21", "p": 13.8, "note": "3/21 최저호가 13.8억"}, {"d": "2026-04-04", "p": 14.8, "note": "4/4 최저호가 14.8억"}, {"d": "2026-04-18", "p": 14.5, "note": "4/18 최저호가 14.5억"}, {"d": "2026-05-02", "p": 14.8, "note": "5/2 최저호가 14.8억"}, {"d": "2026-05-25", "p": 15.0, "note": "5/25 최저호가 15.0억"}, {"d": "2026-07-12", "p": 15.2, "note": "7/12 최저호가 15.2억"}], "jeonse": [{"d": "2026-05-25", "p": 8.85, "note": "5/25 전세호가 8.85억"}, {"d": "2026-07-12", "p": 8.5, "note": "7/12 전세호가 8.50억"}]}, {"id": "gracium", "name": "고덕그라시움 (강동 84㎡)", "region": "강동구", "color": "#d97706", "rank": "정책영향 10위 (전세호가 선행·완만한 매매회복)", "tx": [{"d": "2026-01-22", "p": 24.99, "note": "1/22 24.99억"}, {"d": "2026-02-15", "p": 18.5, "note": "2/15 18.5억(특수/급매 단건)"}, {"d": "2026-04-18", "p": 25.1, "note": "4월 22층 25.1억"}, {"d": "2026-05-22", "p": 23.6, "note": "5/22 23.6억(5월 5건 평균 24.6억)"}, {"d": "2026-06-30", "p": 25.2, "note": "6월 말 정상거래 25.0~25.45억"}, {"d": "2026-07-31", "p": 24.9, "note": "7월 24.9억"}, {"d": "2026-09-30", "p": 24.5, "note": "9월 24.5억(10월 시세 25.5억)"}], "ask": [{"d": "2026-03-21", "p": 23.9, "note": "3/21~4/4 최저호가 23.9억"}, {"d": "2026-04-18", "p": 23.45, "note": "4/18 최저호가 23.45억"}, {"d": "2026-05-02", "p": 24.0, "note": "5/2~5/25 최저호가 24.0억"}, {"d": "2026-07-12", "p": 24.9, "note": "7/12 최저호가 24.9억"}], "jeonse": [{"d": "2026-03-21", "p": 9.5, "note": "3/21~4/18 전세호가 9.5억"}, {"d": "2026-05-02", "p": 10.0, "note": "5/2~5/25 전세호가 10.0억"}, {"d": "2026-07-12", "p": 11.0, "note": "7/12 전세호가 11.0억"}]}, {"id": "dongtan_lotte", "name": "동탄역롯데캐슬 (동탄2 84㎡)", "region": "화성 동탄", "color": "#db2777", "rank": "비규제 대체수요 선행군 (7/1 후속 규제지정)", "tx": [{"d": "2026-02-20", "p": 18.8, "note": "2/20 18.8억"}, {"d": "2026-03-05", "p": 22.0, "note": "3/5 20.0~22.0억(260307 시트)"}, {"d": "2026-05-16", "p": 20.8, "note": "5/16 39층 20.8억"}, {"d": "2026-05-27", "p": 20.5, "note": "5/27 28층 20.5억"}, {"d": "2026-06-04", "p": 22.25, "note": "6/4 33층 22.25억 신고가(7/1 토허제 지정)"}], "ask": [], "jeonse": []}, {"id": "shinjeong1", "name": "신정마을주공1단지 (수지 59㎡)", "region": "용인 수지", "color": "#4f46e5", "rank": "15억이하 대출실수요 선행군 (실거래가 호가 선행)", "tx": [{"d": "2025-11-20", "p": 10.1, "note": "25.11 약 10.1억"}, {"d": "2026-01-31", "p": 10.475, "note": "1월 6건 중앙값 10.475억"}, {"d": "2026-02-28", "p": 11.5, "note": "2월 7건 중앙값 11.5억"}, {"d": "2026-03-21", "p": 10.8, "note": "3/21 10.8억"}, {"d": "2026-03-31", "p": 11.2, "note": "3/31 11.2억"}, {"d": "2026-04-09", "p": 11.8, "note": "4/9 11.8억(4월 중앙 11.3억)"}, {"d": "2026-05-06", "p": 12.5, "note": "5/6 12.5억(5월 중앙 12.0억)"}, {"d": "2026-06-24", "p": 11.9, "note": "6/24 11.9억(6월 중앙 12.0억)"}, {"d": "2026-07-31", "p": 12.3, "note": "7월 5건 중앙값 12.3억"}, {"d": "2026-08-31", "p": 12.85, "note": "8월 2건 중앙값 12.85억(최고 12.9억)"}, {"d": "2026-09-30", "p": 12.0, "note": "9월 1건 12.0억"}], "ask": [{"d": "2026-04-04", "p": 11.5, "note": "4/4 최저호가 11.5억"}, {"d": "2026-04-18", "p": 11.2, "note": "4/18 최저호가 11.2억"}, {"d": "2026-05-02", "p": 11.5, "note": "5/2~5/25 최저호가 11.5억"}, {"d": "2026-07-12", "p": 12.5, "note": "7/12 최저호가 12.5억 후행상향"}], "jeonse": [{"d": "2026-04-04", "p": 5.5, "note": "4/4 59㎡ 전세호가 5.5억"}, {"d": "2026-04-18", "p": 5.4, "note": "4/18 59㎡ 전세호가 5.4억"}, {"d": "2026-05-02", "p": 5.2, "note": "5/2 59㎡ 전세호가 5.2억"}, {"d": "2026-05-25", "p": 4.7, "note": "5/25 59㎡ 전세호가 4.7억"}, {"d": "2026-07-12", "p": 5.1, "note": "7/12 59㎡ 전세호가 5.1억"}]}, {"id": "shinjeong7", "name": "신정마을7단지상록 (수지 84㎡)", "region": "용인 수지", "color": "#64748b", "rank": "약한 반응·표본부족군 (호가 13.5억 장기 고정)", "tx": [{"d": "2026-01-20", "p": 11.5, "note": "1/20 11.5억"}, {"d": "2026-02-14", "p": 13.8, "note": "2/14 13.8억"}, {"d": "2026-04-28", "p": 14.0, "note": "4/28 14.0억"}, {"d": "2026-05-16", "p": 13.8, "note": "5/16 13.8억(5월 2건 평균 13.83억)"}, {"d": "2026-07-31", "p": 14.0, "note": "7월 1건 14.0억"}, {"d": "2026-08-31", "p": 14.45, "note": "8월 2건 중앙값 14.45억"}], "ask": [{"d": "2026-03-07", "p": 10.3, "note": "3/7 최저호가 10.3억"}, {"d": "2026-03-21", "p": 13.5, "note": "3/21 최저호가 13.5억"}, {"d": "2026-04-04", "p": 13.2, "note": "4/4 최저호가 13.2억"}, {"d": "2026-04-18", "p": 13.5, "note": "4/18~7/12 최저호가 13.5억 고정"}], "jeonse": []}, {"id": "parkview", "name": "분당 파크뷰 (분당 84㎡)", "region": "성남 분당", "color": "#be123c", "rank": "1기신도시 선도·고가대장 (4월 26.5억 신고가)", "tx": [{"d": "2025-06-25", "p": 21.0, "note": "25.06 21.0억"}, {"d": "2026-02-05", "p": 21.5, "note": "2/5 21.5억"}, {"d": "2026-04-28", "p": 26.5, "note": "4/28 26층 26.5억 신고가"}, {"d": "2026-06-19", "p": 26.4, "note": "6/19 20층 26.4억"}], "ask": [{"d": "2026-06-19", "p": 27.0, "note": "6월 최저호가 약 27.0억"}], "jeonse": []}];
+const ALL_ROWS = [{"계약일_또는_기준일": "2025-06-05", "연월_주차_구분": "2025-06 (25년 6월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "31.50", "층_또는_거래건수": "25년 상반기 기준", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 6월 잠실엘스 84㎡ 31억 중반 시세 형성", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2025-06-15", "연월_주차_구분": "2025-06 (25년 6월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "강남3구(서초)", "법정동_지역": "서울 서초구 반포동", "단지명": "래미안원베일리", "총세대수": "2990", "전용면적(㎡)": "84.95", "실거래가(억원)": "63.00", "층_또는_거래건수": "25년 6월 월중위", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 6월 반포 래미안원베일리 84㎡ 월 중위가격 63억 형성", "출처_URL": "https://www.mk.co.kr/news/realestate/12106323"}, {"계약일_또는_기준일": "2025-06-20", "연월_주차_구분": "2025-06 (25년 6월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "판교", "법정동_지역": "성남시 분당구 백현동", "단지명": "판교푸르지오그랑블", "총세대수": "948", "전용면적(㎡)": "103.96", "실거래가(억원)": "34.50", "층_또는_거래건수": "25년 6월 거래", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 6월 경기도 고가 아파트 상위 거래 기록", "출처_URL": "https://avo-kado.co.kr/actual-price/A46374606/44/sale"}, {"계약일_또는_기준일": "2025-06-25", "연월_주차_구분": "2025-06 (25년 6월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "분당", "법정동_지역": "성남시 분당구 정자동", "단지명": "파크뷰", "총세대수": "1829", "전용면적(㎡)": "84.99", "실거래가(억원)": "21.00", "층_또는_거래건수": "25년 6월 거래", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 중반 분당 파크뷰 전용 84㎡ 21억 선 거래", "출처_URL": "https://cheongyak.com/sold/11809"}, {"계약일_또는_기준일": "2025-07-26", "연월_주차_구분": "2025-07 (25년 7월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "위례(성남)", "법정동_지역": "성남시 수정구 창곡동", "단지명": "위례자이더시티", "총세대수": "800", "전용면적(㎡)": "84.00", "실거래가(억원)": "15.20", "층_또는_거래건수": "단건(최신 실거래)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.50", "당시_전세호가_59㎡(억원)": "7.50", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "261011 부동산.xlsx 전 시트 기준 위례자이더시티 최신 실거래(거주의무 제약 단지)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2025-08-24", "연월_주차_구분": "2025-08 (25년 8월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "32.20", "층_또는_거래건수": "25년 8월 실거래/시세", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 8월 잠실엘스 84㎡ 32.2억 기록", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2025-08-25", "연월_주차_구분": "2025-08 (25년 8월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "성남수정", "법정동_지역": "성남시 수정구 신흥동", "단지명": "산성역포레스티아", "총세대수": "4089", "전용면적(㎡)": "84.92", "실거래가(억원)": "14.80", "층_또는_거래건수": "단건(260321시트 기준)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "15.10~15.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.00", "당시_전세호가_59㎡(억원)": "6.50", "최저호가_대비_실거래_괴리(억원)": "-0.30", "호가_실거래_관계_및_정책반응_해석": "261011 부동산.xlsx(260321~260502 시트) 기재 2025년 8월 기준 실거래가", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2025-08-28", "연월_주차_구분": "2025-08 (25년 8월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "분당", "법정동_지역": "성남시 분당구 정자동", "단지명": "정자아이파크", "총세대수": "441", "전용면적(㎡)": "84.00", "실거래가(억원)": "15.60", "층_또는_거래건수": "단건", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.70", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 8월 말 정자아이파크 매매 15.6억(26년 1월 17.2억으로 상승)", "출처_URL": "https://zippoom.com/%EB%B6%80%EB%8F%99%EC%82%B0/%EA%B2%BD%EA%B8%B0-%EC%84%B1%EB%82%A8%EC%8B%9C-%EB%B6%84%EB%8B%B9%EA%B5%AC-%EC%A0%95%EC%9E%90%EB%8F%99-%EC%A0%95%EC%9E%90%EC%95%84%EC%9D%B4%ED%8C%8C%ED%81%AC/v8uf3c"}, {"계약일_또는_기준일": "2025-09-02", "연월_주차_구분": "2025-09 (25년 9월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "16.80", "층_또는_거래건수": "25년 9월 실거래(연 80건)", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 35평 연간 80건 거래(평당 약 6,000만 원 수준)", "출처_URL": "https://www.jipgap.com/complex/41117/광교중흥에스클래스"}, {"계약일_또는_기준일": "2025-09-26", "연월_주차_구분": "2025-09 (25년 9월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "32.75", "층_또는_거래건수": "25년 9월 실거래", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 9월 잠실엘스 84㎡ 32억 7,500만 원 상승 체결", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2025-10-15", "연월_주차_구분": "2025-10 (25년 10월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "15.80", "층_또는_거래건수": "25년 하반기(연 162건)", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 10·15 대책 전후 수지 대장주 35평 연간 162건 활발한 거래", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2025-10-19", "연월_주차_구분": "2025-10 (25년 10월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "강동", "법정동_지역": "서울 강동구 둔촌동", "단지명": "올림픽파크포레온", "총세대수": "12032", "전용면적(㎡)": "84.99", "실거래가(억원)": "32.00", "층_또는_거래건수": "단건(전고점 거래)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "26.80", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.90", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+5.20", "호가_실거래_관계_및_정책반응_해석": "261011 부동산.xlsx(260321~260712 시트) 기재 2025년 10월 32억 고점 실거래", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2025-11-06", "연월_주차_구분": "2025-11 (25년 11월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "강남3구(서초)", "법정동_지역": "서울 서초구 반포동", "단지명": "아크로리버파크", "총세대수": "1612", "전용면적(㎡)": "84.95", "실거래가(억원)": "53.90", "층_또는_거래건수": "25년 11월 기준", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 11월 반포 아크로리버파크 전용 84㎡ 53.9억(59㎡ 45.6억)", "출처_URL": "https://jaegebal.com/develops/2858/posts/9996"}, {"계약일_또는_기준일": "2025-11-10", "연월_주차_구분": "2025-11 (25년 11월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "33.00", "층_또는_거래건수": "25년 11월 실거래", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 11월 잠실엘스 전용 84㎡ 33억 돌파", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2025-11-20", "연월_주차_구분": "2025-11 (25년 11월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "10.10", "층_또는_거래건수": "25년 하반기(연 119건)", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2025년 연간 119건 손바뀜 속 25년 초 8.3억에서 연말 10억대 진입", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2025-12-16", "연월_주차_구분": "2025-12 (25년 12월)", "정책_국면_구분": "00_정책발표전_25년하반기 (2025.06~2025.12)", "권역": "위례(하남)", "법정동_지역": "하남시 학암동", "단지명": "위례포레자이", "총세대수": "558", "전용면적(㎡)": "95.00", "실거래가(억원)": "14.00", "층_또는_거래건수": "단건(260321시트 기준)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "17.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.50", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-3.00", "호가_실거래_관계_및_정책반응_해석": "261011 부동산.xlsx(260321~260502 시트) 기재 2025년 12월 전용 95㎡ 실거래", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-01-15", "연월_주차_구분": "2026-W03 (1월 3주)", "정책_국면_구분": "01_연초_정책언급전 (2026.01.01~01.22)", "권역": "분당", "법정동_지역": "성남시 분당구 정자동", "단지명": "정자아이파크", "총세대수": "441", "전용면적(㎡)": "84.00", "실거래가(억원)": "17.20", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "25년 8월(15.6억) 대비 +1.6억 상승한 연초 거래(260307 시트)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-01-20", "연월_주차_구분": "2026-W04 (1월 3주)", "정책_국면_구분": "01_연초_정책언급전 (2026.01.01~01.22)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을7단지상록", "총세대수": "670", "전용면적(㎡)": "84.00", "실거래가(억원)": "11.50", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "10.30", "당시_매도최고호가(억원)": "14.00", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "6.10", "최저호가_대비_실거래_괴리(억원)": "+1.20", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기록(최저호가 10.3억 대비 실거래 11.5억)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-01-20", "연월_주차_구분": "2026-W04 (1월 3주)", "정책_국면_구분": "01_연초_정책언급전 (2026.01.01~01.22)", "권역": "판교", "법정동_지역": "성남시 분당구 백현동", "단지명": "판교푸르지오그랑블", "총세대수": "948", "전용면적(㎡)": "103.96", "실거래가(억원)": "36.40", "층_또는_거래건수": "19층", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "정책 발표 전 판교 초역세권 중대형 고가 실거래", "출처_URL": "https://avo-kado.co.kr/actual-price/A46374606/44/sale"}, {"계약일_또는_기준일": "2026-01-22", "연월_주차_구분": "2026-W04 (1월 4주)", "정책_국면_구분": "01_연초_정책언급전 (2026.01.01~01.22)", "권역": "강동", "법정동_지역": "서울 강동구 고덕동", "단지명": "고덕그라시움", "총세대수": "4932", "전용면적(㎡)": "84.04", "실거래가(억원)": "24.99", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "23.90", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.50", "당시_전세호가_59㎡(억원)": "8.00", "최저호가_대비_실거래_괴리(억원)": "+1.09", "호가_실거래_관계_및_정책반응_해석": "1/23 연장불가 시사 하루 전 24.99억 거래(최저호가 23.9억)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-01-24", "연월_주차_구분": "2026-W04 (1월 4주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "수지/광교", "법정동_지역": "용인시 수지구 상현동", "단지명": "광교자이더클래스", "총세대수": "445", "전용면적(㎡)": "84.00", "실거래가(억원)": "14.17", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "13.80", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "8.00", "최저호가_대비_실거래_괴리(억원)": "+0.37", "호가_실거래_관계_및_정책반응_해석": "1/23 연장불가 시사 직후 상현역 역세권 14.17억 거래(최저호가 13.8억)", "출처_URL": "https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스"}, {"계약일_또는_기준일": "2026-01-25", "연월_주차_구분": "2026-W04 (1월 4주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "기흥", "법정동_지역": "용인시 기흥구 구갈동", "단지명": "기흥역지웰푸르지오", "총세대수": "616", "전용면적(㎡)": "84.00", "실거래가(억원)": "10.50", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기재 기흥역세권 15억 이하 실수요 거래", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-01-28", "연월_주차_구분": "2026-W05 (1월 4주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "위례(송파)", "법정동_지역": "서울 송파구 장지동", "단지명": "위례중앙푸르지오1단지", "총세대수": "163", "전용면적(㎡)": "84.73", "실거래가(억원)": "22.00", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "22.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.70", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-0.50", "호가_실거래_관계_및_정책반응_해석": "260307~260712 전 시트 기준점 거래(최저호가 22.5억, 전세호가 8.7억)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-01-31", "연월_주차_구분": "2026-W05 (1월 5주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "10.475", "층_또는_거래건수": "1월 6건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "11.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.50", "최저호가_대비_실거래_괴리(억원)": "-1.03", "호가_실거래_관계_및_정책반응_해석": "15억 이하 주담대 실수요 유입으로 1월 6건 중앙값 10.475억 기록", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-02-03", "연월_주차_구분": "2026-W06 (2월 1주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "16.65", "층_또는_거래건수": "단건(2월 5건 중앙값 16.45억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "16.00", "당시_매도최고호가(억원)": "25.00", "당시_전세호가_84㎡(억원)": "8.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.65", "호가_실거래_관계_및_정책반응_해석": "260321 시트 기재 실거래 16.65억(당시 최저호가 16.0억 상회 체결)", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2026-02-04", "연월_주차_구분": "2026-W06 (2월 1주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "17.15", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "17.00~17.30", "당시_매도최고호가(억원)": "36.00", "당시_전세호가_84㎡(억원)": "8.80~10.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.15", "호가_실거래_관계_및_정책반응_해석": "260321~260712 시트 기준점(실거래 17.15억 vs 최저호가 17.0~17.3억)", "출처_URL": "https://www.jipgap.com/complex/41117/광교중흥에스클래스"}, {"계약일_또는_기준일": "2026-02-05", "연월_주차_구분": "2026-W06 (2월 1주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "분당", "법정동_지역": "성남시 분당구 정자동", "단지명": "파크뷰", "총세대수": "1829", "전용면적(㎡)": "84.99", "실거래가(억원)": "21.50", "층_또는_거래건수": "단건(2월 4건)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307 시트 기재 2월 초 분당 파크뷰 전용 84㎡ 21.5억 거래", "출처_URL": "https://cheongyak.com/sold/11809"}, {"계약일_또는_기준일": "2026-02-10", "연월_주차_구분": "2026-W07 (2월 2주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "동탄", "법정동_지역": "화성시 반송동", "단지명": "동탄시범다은마을삼성래미안", "총세대수": "1068", "전용면적(㎡)": "84.00", "실거래가(억원)": "9.50", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307 시트 기재 동탄1신도시 10억 이하 실수요 거래", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-10", "연월_주차_구분": "2026-W07 (2월 2주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "15.20", "층_또는_거래건수": "단건(저층/급매)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "16.00", "당시_매도최고호가(억원)": "25.00", "당시_전세호가_84㎡(억원)": "8.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-0.80", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기재 2월 저층 급매성 거래(최저호가 16.0억 하회)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-10", "연월_주차_구분": "2026-W07 (2월 2주)", "정책_국면_구분": "02_연장불가시사~공식발표전 (2026.01.23~02.11)", "권역": "강남3구(강남)", "법정동_지역": "서울 강남구 압구정동", "단지명": "압구정현대3,4,5,6,7차", "총세대수": "2954", "전용면적(㎡)": "84.00", "실거래가(억원)": "48.50", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307 시트 기재 2/12 공식 발표 직전 압구정 재건축 84㎡ 거래", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-12", "연월_주차_구분": "2026-W07 (2월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(서초)", "법정동_지역": "서울 서초구 반포동", "단지명": "래미안퍼스티지", "총세대수": "2444", "전용면적(㎡)": "84.93", "실거래가(억원)": "48.50", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2/12 정부 양도세 중과 유예 종료 공식 발표일 당일 거래(260307 시트)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-14", "연월_주차_구분": "2026-W07 (2월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을7단지상록", "총세대수": "670", "전용면적(㎡)": "84.00", "실거래가(억원)": "13.80", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "13.20~13.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "6.10", "최저호가_대비_실거래_괴리(억원)": "+0.60", "호가_실거래_관계_및_정책반응_해석": "1월(11.5억) 대비 +2.3억 상승 체결 후 최저호가 13.5억 형성", "출처_URL": "https://apt.k9gle.com/apt/7704/풍덕천동-신정7단지-상록-공무원"}, {"계약일_또는_기준일": "2026-02-14", "연월_주차_구분": "2026-W07 (2월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "위례(하남)", "법정동_지역": "하남시 학암동", "단지명": "위례포레자이", "총세대수": "558", "전용면적(㎡)": "95.00", "실거래가(억원)": "16.50", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "17.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.50", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-0.50", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기재(25년 12월 14.0억 대비 +2.5억 상승)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-15", "연월_주차_구분": "2026-W07 (2월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강동", "법정동_지역": "서울 강동구 고덕동", "단지명": "고덕그라시움", "총세대수": "4932", "전용면적(㎡)": "84.04", "실거래가(억원)": "18.50", "층_또는_거래건수": "단건(특수/저가거래)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "23.90", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.50", "당시_전세호가_59㎡(억원)": "8.00", "최저호가_대비_실거래_괴리(억원)": "-5.40", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기재 특수 저가 거래(정상 최저호가는 23.9억 유지)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-15", "연월_주차_구분": "2026-W07 (2월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지/광교", "법정동_지역": "용인시 수지구 상현동", "단지명": "광교자이더클래스", "총세대수": "445", "전용면적(㎡)": "84.00", "실거래가(억원)": "14.50", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "13.80~14.80", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "8.00", "최저호가_대비_실거래_괴리(억원)": "+0.70", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기재(1/24 14.17억 → 2/15 14.50억 상승)", "출처_URL": "https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스"}, {"계약일_또는_기준일": "2026-02-15", "연월_주차_구분": "2026-W07 (2월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "하남", "법정동_지역": "하남시 망월동", "단지명": "미사강변푸르지오", "총세대수": "1188", "전용면적(㎡)": "84.99", "실거래가(억원)": "13.00", "층_또는_거래건수": "단건", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "하남 미사강변 대표 단지 2월 중순 13.0억 실거래", "출처_URL": "https://avo-kado.co.kr/actual-price/A10027514/33/sale"}, {"계약일_또는_기준일": "2026-02-15", "연월_주차_구분": "2026-W07 (2월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(강남)", "법정동_지역": "서울 강남구 압구정동", "단지명": "압구정현대1,2차(신현대)", "총세대수": "1924", "전용면적(㎡)": "84.00", "실거래가(억원)": "49.00", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307 시트 기재 2/12 공식 발표 직후 압구정 신현대 84㎡ 49억 체결", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-18", "연월_주차_구분": "2026-W08 (2월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(서초)", "법정동_지역": "서울 서초구 반포동", "단지명": "아크로리버파크", "총세대수": "1612", "전용면적(㎡)": "84.95", "실거래가(억원)": "53.00", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "49.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+4.00", "호가_실거래_관계_및_정책반응_해석": "260307 시트 기재(25년 11월 53.9억 대비 소폭 조정된 53.0억 체결)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-20", "연월_주차_구분": "2026-W08 (2월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "동탄", "법정동_지역": "화성시 여울동", "단지명": "동탄역롯데캐슬", "총세대수": "940", "전용면적(㎡)": "84.70", "실거래가(억원)": "18.80", "층_또는_거래건수": "단건", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "비규제 대체수요 유입 출발점(2월 18.8억 → 3/5 22.0억 → 6/4 22.25억)", "출처_URL": "https://biz.heraldcorp.com/article/10899528"}, {"계약일_또는_기준일": "2026-02-20", "연월_주차_구분": "2026-W08 (2월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "위례(성남)", "법정동_지역": "성남시 수정구 창곡동", "단지명": "위례자이더시티", "총세대수": "800", "전용면적(㎡)": "84.00", "실거래가(억원)": "15.80", "층_또는_거래건수": "260307시트 기재", "데이터_출처유형": "261011 엑셀 시트", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.50", "당시_전세호가_59㎡(억원)": "7.50", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기재(이후 시트에서는 25.07.26 15.2억으로 정정 관리)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-20", "연월_주차_구분": "2026-W08 (2월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.88", "실거래가(억원)": "37.00", "층_또는_거래건수": "상반기 고점 단건", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.95", "당시_전세호가_59㎡(억원)": "10.00", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "잠실엘스 상반기 고점(37.0억) 기록 후 다주택 절세 급매 조정 국면 진입", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-02-20", "연월_주차_구분": "2026-W08 (2월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "판교", "법정동_지역": "성남시 분당구 백현동", "단지명": "판교푸르지오그랑블", "총세대수": "948", "전용면적(㎡)": "97.71", "실거래가(억원)": "29.00", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307 시트 기재 판교푸르지오그랑블 29.0억 실거래", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-25", "연월_주차_구분": "2026-W09 (2월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "판교", "법정동_지역": "성남시 분당구 판교동", "단지명": "판교원마을9단지", "총세대수": "1045", "전용면적(㎡)": "84.00", "실거래가(억원)": "17.80", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307 시트 기재 서판교 판교원마을9단지 17.8억 거래(26년 중위가 18.425억)", "출처_URL": "https://xn--9z2b11sikh7te8l.com/danji/41135/%ED%8C%90%EA%B5%90%EC%9B%90%EB%A7%88%EC%9D%849%EB%8B%A8%EC%A7%80-%ED%95%9C%EB%A6%BC%ED%92%80%EC%97%90%EB%B2%84-%ED%8C%90%EA%B5%90%EB%8F%99.html"}, {"계약일_또는_기준일": "2026-02-28", "연월_주차_구분": "2026-W09 (2월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "e편한세상수지", "총세대수": "1237", "전용면적(㎡)": "84.00", "실거래가(억원)": "14.95", "층_또는_거래건수": "1~2월 10건 중앙값", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "15억 이하 주담대 경계선에서 1~2월 10건 활발히 소화", "출처_URL": "https://www.jipgap.com/complex/41465/e%ED%8E%B8%ED%95%9C%EC%84%B8%EC%83%81%EC%88%98%EC%A7%80"}, {"계약일_또는_기준일": "2026-02-28", "연월_주차_구분": "2026-W09 (2월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "20.50", "층_또는_거래건수": "호수조망 고층(일반 17.15억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "17.00~17.20", "당시_매도최고호가(억원)": "36.00", "당시_전세호가_84㎡(억원)": "8.80", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+3.50", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 20.5억(조망 고층) / 260321 시트 17.15억(일반층) 병기", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-02-28", "연월_주차_구분": "2026-W09 (2월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "리센츠", "총세대수": "5563", "전용면적(㎡)": "84.99", "실거래가(억원)": "33.80", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "30.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.90", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+3.80", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기재 2월 말 실거래 33.8억(3/21 최저호가 30.0억)", "출처_URL": "https://cy-on.kr/trades/7960/"}, {"계약일_또는_기준일": "2026-02-28", "연월_주차_구분": "2026-W09 (2월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "11.50", "층_또는_거래건수": "2월 7건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "11.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.50", "최저호가_대비_실거래_괴리(억원)": "+0.00", "호가_실거래_관계_및_정책반응_해석": "1월(10.475억) 대비 한 달 만에 +1.025억 급등(유예 종료 전 실수요 선행)", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-03-01", "연월_주차_구분": "2026-W09 (3월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "성남수정", "법정동_지역": "성남시 수정구 신흥동", "단지명": "산성역포레스티아", "총세대수": "4089", "전용면적(㎡)": "84.92", "실거래가(억원)": "13.50", "층_또는_거래건수": "단건(절세 급매)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "13.50", "당시_매도최고호가(억원)": "26.00", "당시_전세호가_84㎡(억원)": "8.00", "당시_전세호가_59㎡(억원)": "6.50", "최저호가_대비_실거래_괴리(억원)": "+0.00", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기재: 최저호가(13.5억)와 동일한 가격에 급매 체결", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-03-01", "연월_주차_구분": "2026-W09 (3월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "34.20", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.95", "당시_전세호가_59㎡(억원)": "10.00", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307·260314 시트 기재 3월 초 거래(2/20 37억 대비 조정 시작)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-03-02", "연월_주차_구분": "2026-W10 (3월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(서초)", "법정동_지역": "서울 서초구 반포동", "단지명": "래미안원베일리", "총세대수": "2990", "전용면적(㎡)": "84.95", "실거래가(억원)": "62.50", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "41.00", "당시_매도최고호가(억원)": "180.00", "당시_전세호가_84㎡(억원)": "18.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+21.50", "호가_실거래_관계_및_정책반응_해석": "260307 시트 기재(전체 최저호가 41억은 소형 평형 기준, 최고호가 180억)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-03-03", "연월_주차_구분": "2026-W10 (3월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "리센츠", "총세대수": "5563", "전용면적(㎡)": "84.99", "실거래가(억원)": "34.40", "층_또는_거래건수": "일반층(2층 급매 29.4억 별도)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "30.00~32.40", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.90~12.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+4.40", "호가_실거래_관계_및_정책반응_해석": "260321~260712 시트: 일반 거래 34.4억과 2층 절세 급매 29.4억 동시 관측", "출처_URL": "https://cy-on.kr/trades/7960/"}, {"계약일_또는_기준일": "2026-03-04", "연월_주차_구분": "2026-W10 (3월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강동", "법정동_지역": "서울 강동구 둔촌동", "단지명": "올림픽파크포레온", "총세대수": "12032", "전용면적(㎡)": "84.99", "실거래가(억원)": "27.20", "층_또는_거래건수": "단건(절세 급매)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "26.80", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.90", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.40", "호가_실거래_관계_및_정책반응_해석": "25년 10월(32.0억) 대비 -4.8억(-15.0%) 할인된 절세 급매 체결(최저호가 26.8억)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-03-05", "연월_주차_구분": "2026-W10 (3월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "동탄", "법정동_지역": "화성시 여울동", "단지명": "동탄역롯데캐슬", "총세대수": "940", "전용면적(㎡)": "84.70", "실거래가(억원)": "22.00", "층_또는_거래건수": "단건(260307시트)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260307 시트 기재 동탄역롯데캐슬 22.0억 거래(비규제 풍선효과·GTX 호재)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-03-05", "연월_주차_구분": "2026-W10 (3월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "34.00", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.95", "당시_전세호가_59㎡(억원)": "10.00", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260321 시트 기재 3월 초 거래(전세호가 84㎡ 9.95억, 59㎡ 10.0억 역전 현상)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-03-11", "연월_주차_구분": "2026-W11 (3월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "17.40", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "15.80", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.50", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+1.60", "호가_실거래_관계_및_정책반응_해석": "실거래는 17.4억 찍혔으나 다주택 급매 출회로 최저호가는 15.8억으로 선행 하락", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2026-03-17", "연월_주차_구분": "2026-W12 (3월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "주공9단지", "총세대수": "812", "전용면적(㎡)": "59.00", "실거래가(억원)": "11.30", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "11.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.20", "최저호가_대비_실거래_괴리(억원)": "+0.30", "호가_실거래_관계_및_정책반응_해석": "260418 시트 기재 수지 신정마을9단지(주공9단지) 11.3억 거래(최저호가 11.0억)", "출처_URL": "https://disco.re/l/s690ci"}, {"계약일_또는_기준일": "2026-03-21", "연월_주차_구분": "2026-W12 (3월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "10.80", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "11.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.50", "최저호가_대비_실거래_괴리(억원)": "-0.70", "호가_실거래_관계_및_정책반응_해석": "260404 시트 기재 3월 중순 거래(최저호가 11.5억 유지)", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-03-28", "연월_주차_구분": "2026-W13 (3월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.88", "실거래가(억원)": "31.50", "층_또는_거래건수": "11층(절세 급매)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "30.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.80", "당시_전세호가_59㎡(억원)": "9.50", "최저호가_대비_실거래_괴리(억원)": "+1.00", "호가_실거래_관계_및_정책반응_해석": "다주택자 양도세 중과 회피 급매물이 31.5억에 체결되며 가격 조정 심화", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-03-31", "연월_주차_구분": "2026-W14 (3월 5주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "11.20", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "11.20", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.40", "최저호가_대비_실거래_괴리(억원)": "+0.00", "호가_실거래_관계_및_정책반응_해석": "260418 시트 기재: 최저호가(11.5→11.2억)와 실거래(11.2억)가 일치하며 소화", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-04-02", "연월_주차_구분": "2026-W14 (4월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.88", "실거래가(억원)": "33.60", "층_또는_거래건수": "단건(4월 25건 중앙값 32.9억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "30.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.80", "당시_전세호가_59㎡(억원)": "9.50", "최저호가_대비_실거래_괴리(억원)": "+3.10", "호가_실거래_관계_및_정책반응_해석": "260404 시트 기재 33.6억 거래(최저호가 30.5억, 84㎡ 전세호가 9.95→10.8억 상승)", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-04-04", "연월_주차_구분": "2026-W14 (4월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "31.00", "층_또는_거래건수": "절세 급매 저점 단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "27.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.20~12.50", "당시_전세호가_59㎡(억원)": "9.50", "최저호가_대비_실거래_괴리(억원)": "+4.00", "호가_실거래_관계_및_정책반응_해석": "260502 시트 기재: 실거래 저점 31.0억 체결 및 최저호가 30.5→27.0억으로 선행 급락", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-04-06", "연월_주차_구분": "2026-W15 (4월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "위례(하남)", "법정동_지역": "하남시 학암동", "단지명": "위례포레자이", "총세대수": "558", "전용면적(㎡)": "95.00", "실거래가(억원)": "15.50", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "16.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "7.80", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-1.00", "호가_실거래_관계_및_정책반응_해석": "260525 시트 기재: 최저호가가 17.0→16.5억으로 낮아지며 15.5억에 거래 체결", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-04-07", "연월_주차_구분": "2026-W15 (4월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "17.80", "층_또는_거래건수": "단건(4월 5건 중앙값 17.5억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "17.40", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.40", "호가_실거래_관계_및_정책반응_해석": "260502 시트 기재: 최저호가(17.3→17.4억) 상향과 함께 17.8억 실거래", "출처_URL": "https://www.jipgap.com/complex/41117/광교중흥에스클래스"}, {"계약일_또는_기준일": "2026-04-07", "연월_주차_구분": "2026-W15 (4월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "33.10", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "30.90", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.20", "당시_전세호가_59㎡(억원)": "9.50", "최저호가_대비_실거래_괴리(억원)": "+2.20", "호가_실거래_관계_및_정책반응_해석": "260418 시트 기재: 급매 소화 중 중층 매물 33.1억 체결(최저호가 30.5→30.9억)", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-04-07", "연월_주차_구분": "2026-W15 (4월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "주공9단지", "총세대수": "812", "전용면적(㎡)": "59.00", "실거래가(억원)": "11.60", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "11.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.20", "최저호가_대비_실거래_괴리(억원)": "+0.60", "호가_실거래_관계_및_정책반응_해석": "260502 시트 기재: 3/17(11.3억) 대비 +0.3억 상승한 11.6억 체결", "출처_URL": "https://disco.re/l/s690ci"}, {"계약일_또는_기준일": "2026-04-08", "연월_주차_구분": "2026-W15 (4월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "성남수정", "법정동_지역": "성남시 수정구 신흥동", "단지명": "산성역포레스티아", "총세대수": "4089", "전용면적(㎡)": "84.92", "실거래가(억원)": "15.40", "층_또는_거래건수": "4월 3건 중앙값(9층 11.1억 특수 별도)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "15.00~15.30", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.00", "당시_전세호가_59㎡(억원)": "6.50", "최저호가_대비_실거래_괴리(억원)": "+0.40", "호가_실거래_관계_및_정책반응_해석": "정상 거래 중앙값 15.4억(260502 시트 11.1억은 9층 특수 조건 거래)", "출처_URL": "https://apthi.kr/apttrade/411316951/202602"}, {"계약일_또는_기준일": "2026-04-08", "연월_주차_구분": "2026-W15 (4월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "15.40", "층_또는_거래건수": "단건(4월 7건 중앙값 15.5억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "15.80", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.50~9.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-0.40", "호가_실거래_관계_및_정책반응_해석": "최저호가 선행 하락(16.0→15.8억) 직후 다주택 절세 급매가 15.4억 저점에 소화됨", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2026-04-09", "연월_주차_구분": "2026-W15 (4월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "11.80", "층_또는_거래건수": "단건(4월 7건 중앙값 11.3억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "11.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.20", "최저호가_대비_실거래_괴리(억원)": "+0.30", "호가_실거래_관계_및_정책반응_해석": "260502 시트 기재: 실거래가(11.8억)가 최저호가(11.5억)를 뚫고 선행 상승", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-04-09", "연월_주차_구분": "2026-W15 (4월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "판교", "법정동_지역": "성남시 분당구 백현동", "단지명": "판교푸르지오그랑블", "총세대수": "948", "전용면적(㎡)": "97.71", "실거래가(억원)": "35.70", "층_또는_거래건수": "4층", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "판교푸르지오그랑블 36평형 35.7억 신고가 경신(2월 29.0억 대비 +6.7억)", "출처_URL": "https://avo-kado.co.kr/actual-price/A46374606/44/sale"}, {"계약일_또는_기준일": "2026-04-09", "연월_주차_구분": "2026-W15 (4월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 가락동", "단지명": "헬리오시티", "총세대수": "9510", "전용면적(㎡)": "84.95", "실거래가(억원)": "28.40", "층_또는_거래건수": "20층(4월 25건 중앙값 28.0억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "26.45~26.65", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.95", "당시_전세호가_59㎡(억원)": "9.85~9.90", "최저호가_대비_실거래_괴리(억원)": "+1.95", "호가_실거래_관계_및_정책반응_해석": "260418·260502 시트 기재: 4월 절세 매물 25건 대량 손바뀜(최저호가 26.65→26.45억)", "출처_URL": "https://cy-on.kr/trades/8014/"}, {"계약일_또는_기준일": "2026-04-10", "연월_주차_구분": "2026-W15 (4월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(서초)", "법정동_지역": "서울 서초구 반포동", "단지명": "래미안원베일리", "총세대수": "2990", "전용면적(㎡)": "84.95", "실거래가(억원)": "54.50", "층_또는_거래건수": "3층(절세 급매)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "41.00", "당시_매도최고호가(억원)": "180.00", "당시_전세호가_84㎡(억원)": "18.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+13.50", "호가_실거래_관계_및_정책반응_해석": "3/2(62.5억) 대비 -8.0억 낮춘 저층(3층) 다주택 절세 급매 54.5억 체결", "출처_URL": "https://www.mk.co.kr/news/realestate/12106323"}, {"계약일_또는_기준일": "2026-04-16", "연월_주차_구분": "2026-W16 (4월 3주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지/광교", "법정동_지역": "용인시 수지구 상현동", "단지명": "광교자이더클래스", "총세대수": "445", "전용면적(㎡)": "84.00", "실거래가(억원)": "14.85", "층_또는_거래건수": "단건(4월 2건 중앙값 14.92억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "14.50~14.80", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "8.00", "최저호가_대비_실거래_괴리(억원)": "+0.35", "호가_실거래_관계_및_정책반응_해석": "260502 시트 기재: 최저호가(14.8억) 수준에서 실거래(14.85억) 동행 상승", "출처_URL": "https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스"}, {"계약일_또는_기준일": "2026-04-22", "연월_주차_구분": "2026-W17 (4월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강동", "법정동_지역": "서울 강동구 둔촌동", "단지명": "올림픽파크포레온", "총세대수": "12032", "전용면적(㎡)": "84.99", "실거래가(억원)": "27.50", "층_또는_거래건수": "단건(4월 9건 중앙값 27.55억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "27.00~27.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.85~10.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.50", "호가_실거래_관계_및_정책반응_해석": "260502 시트 기재: 최저호가(27.0→27.5억)와 실거래(27.5억)가 정확히 수렴하며 급매 소화", "출처_URL": "https://cy-on.kr/trades/8574/"}, {"계약일_또는_기준일": "2026-04-23", "연월_주차_구분": "2026-W17 (4월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "위례(하남)", "법정동_지역": "하남시 학암동", "단지명": "위례포레자이", "총세대수": "558", "전용면적(㎡)": "95.00", "실거래가(억원)": "10.50", "층_또는_거래건수": "단건(특수/저가거래)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "16.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "7.50", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-6.00", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 정상 최저호가는 16.5억 고정이나 특수 직거래성 10.5억 단건 발생", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-04-25", "연월_주차_구분": "2026-W17 (4월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "광교", "법정동_지역": "수원시 영통구 이의동", "단지명": "자연앤자이1단지", "총세대수": "273", "전용면적(㎡)": "116.00", "실거래가(억원)": "17.20", "층_또는_거래건수": "4월 17.0~17.4억", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "18.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.50", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-1.30", "호가_실거래_관계_및_정책반응_해석": "260525 시트 기재: 전용 116㎡ 대형 평형 4월 17.0~17.4억 거래(최저호가 18.5억)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-04-28", "연월_주차_구분": "2026-W18 (4월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을7단지상록", "총세대수": "670", "전용면적(㎡)": "84.00", "실거래가(억원)": "14.00", "층_또는_거래건수": "단건(4월 1건)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "13.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "0(매물없음)", "최저호가_대비_실거래_괴리(억원)": "+0.50", "호가_실거래_관계_및_정책반응_해석": "260502 시트 기재: 최저호가 13.5억 대비 실거래 14.0억 체결(59㎡ 전세 매물 소진)", "출처_URL": "https://apt.k9gle.com/apt/7704/풍덕천동-신정7단지-상록-공무원"}, {"계약일_또는_기준일": "2026-04-28", "연월_주차_구분": "2026-W18 (4월 4주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "분당", "법정동_지역": "성남시 분당구 정자동", "단지명": "파크뷰", "총세대수": "1829", "전용면적(㎡)": "84.99", "실거래가(억원)": "26.50", "층_또는_거래건수": "26층(신고가)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "분당 파크뷰 전용 84㎡ 26.5억 신고가 경신(2/5 21.5억 대비 +5.0억 급등)", "출처_URL": "https://cheongyak.com/sold/11809"}, {"계약일_또는_기준일": "2026-04-30", "연월_주차_구분": "2026-W18 (4월 5주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "e편한세상수지", "총세대수": "1237", "전용면적(㎡)": "84.00", "실거래가(억원)": "15.50", "층_또는_거래건수": "4월 2건 중앙값(3~4월 6건 15.325억)", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "1~2월(14.95억)에서 15억 경계를 넘어 15.5억으로 연속 상승", "출처_URL": "https://www.jipgap.com/complex/41465/e%ED%8E%B8%ED%95%9C%EC%84%B8%EC%83%81%EC%88%98%EC%A7%80"}, {"계약일_또는_기준일": "2026-04-30", "연월_주차_구분": "2026-W18 (4월 5주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강동", "법정동_지역": "서울 강동구 상일동", "단지명": "고덕아르테온", "총세대수": "4066", "전용면적(㎡)": "84.93", "실거래가(억원)": "21.50", "층_또는_거래건수": "4월 4건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "강동구 상일동 대단지 4월 절세 매물 21.5억 소화", "출처_URL": "https://aptmap.net/apt/8943"}, {"계약일_또는_기준일": "2026-04-30", "연월_주차_구분": "2026-W18 (4월 5주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "리센츠", "총세대수": "5563", "전용면적(㎡)": "84.99", "실거래가(억원)": "33.50", "층_또는_거래건수": "4월 21건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "32.40", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "12.45~13.45", "당시_전세호가_59㎡(억원)": "11.50", "최저호가_대비_실거래_괴리(억원)": "+1.10", "호가_실거래_관계_및_정책반응_해석": "유예 마감 전 달 21건 대량 소화(84㎡ 전세호가가 11.9→13.45억으로 매매보다 선행 급등)", "출처_URL": "https://cy-on.kr/trades/7960/"}, {"계약일_또는_기준일": "2026-04-30", "연월_주차_구분": "2026-W18 (4월 5주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "트리지움", "총세대수": "3696", "전용면적(㎡)": "84.83", "실거래가(억원)": "31.00", "층_또는_거래건수": "4월 17건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "4월 한 달간 다주택 절세 매물 17건 집중 소화", "출처_URL": "https://cy-on.kr/trades/7945/"}, {"계약일_또는_기준일": "2026-04-30", "연월_주차_구분": "2026-W18 (4월 5주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 신천동", "단지명": "파크리오", "총세대수": "6864", "전용면적(㎡)": "84.79", "실거래가(억원)": "28.00", "층_또는_거래건수": "4월 22건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "4월 한 달간 절세 매물 22건 대량 소화(중앙값 28.0억)", "출처_URL": "https://cy-on.kr/trades/7961/"}, {"계약일_또는_기준일": "2026-05-01", "연월_주차_구분": "2026-W18 (5월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 가락동", "단지명": "헬리오시티", "총세대수": "9510", "전용면적(㎡)": "84.95", "실거래가(억원)": "27.97", "층_또는_거래건수": "단건(5/1~5/9 11건 중앙값 28.0억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "26.45", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.95", "당시_전세호가_59㎡(억원)": "9.90", "최저호가_대비_실거래_괴리(억원)": "+1.52", "호가_실거래_관계_및_정책반응_해석": "260525 시트 기재: 유예 마감 전 9일간 11건 집중 체결(최저호가 26.45억)", "출처_URL": "https://cy-on.kr/trades/8014/"}, {"계약일_또는_기준일": "2026-05-05", "연월_주차_구분": "2026-W19 (5월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "광교", "법정동_지역": "수원시 영통구 이의동", "단지명": "자연앤자이1단지", "총세대수": "273", "전용면적(㎡)": "116.00", "실거래가(억원)": "17.00", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "18.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.50", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-1.50", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 유예 마감 주간 대형 평형 17.0억 거래", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-05-06", "연월_주차_구분": "2026-W19 (5월 1주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "12.50", "층_또는_거래건수": "단건(5월 7건 중앙값 12.0억, 평균 11.93억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "11.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "4.70", "최저호가_대비_실거래_괴리(억원)": "+1.00", "호가_실거래_관계_및_정책반응_해석": "260525 시트 기재: 마감 전 실수요 매수로 최저호가(11.5억) 대비 +1.0억 높은 12.5억 체결", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-05-08", "연월_주차_구분": "2026-W19 (5월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "17.55", "층_또는_거래건수": "41층(5/1~5/9 4건 중앙값 17.1억)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "17.40", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.15", "호가_실거래_관계_및_정책반응_해석": "유예 마감 하루 전 4건 집중 소화(중앙값 17.1억, 41층 고층 17.55억)", "출처_URL": "https://www.jipgap.com/complex/41117/광교중흥에스클래스"}, {"계약일_또는_기준일": "2026-05-08", "연월_주차_구분": "2026-W19 (5월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "16.60", "층_또는_거래건수": "단건(5/1~5/9 3건 중앙값 16.3억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "16.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.10", "호가_실거래_관계_및_정책반응_해석": "260525 시트 기재(15.6/16.6억): 최저호가(15.8→16.5억) 반등과 함께 16.6억 회복", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2026-05-08", "연월_주차_구분": "2026-W19 (5월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "판교", "법정동_지역": "성남시 분당구 백현동", "단지명": "판교푸르지오그랑블", "총세대수": "948", "전용면적(㎡)": "117.52", "실거래가(억원)": "41.80", "층_또는_거래건수": "3층(44평형)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "유예 종료 하루 전 44평형 41.8억 체결(현재 최근 실거래 최고 42.9억)", "출처_URL": "https://avo-kado.co.kr/actual-price/A46374606/44/sale"}, {"계약일_또는_기준일": "2026-05-09", "연월_주차_구분": "2026-W19 (5월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(서초)", "법정동_지역": "서울 서초구 반포동", "단지명": "래미안원베일리", "총세대수": "2990", "전용면적(㎡)": "84.95", "실거래가(억원)": "59.00", "층_또는_거래건수": "24층(동일일자 17층 57.5억 병존)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "50.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "18.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+9.00", "호가_실거래_관계_및_정책반응_해석": "양도세 중과 유예 마지막 날(5/9) 57.5억·59.0억 2건 막판 계약 체결", "출처_URL": "https://www.mk.co.kr/news/realestate/12106323"}, {"계약일_또는_기준일": "2026-05-09", "연월_주차_구분": "2026-W19 (5월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "리센츠", "총세대수": "5563", "전용면적(㎡)": "84.99", "실거래가(억원)": "33.50", "층_또는_거래건수": "5/1~5/9 9건 중앙값", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "32.40", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "13.45", "당시_전세호가_59㎡(억원)": "11.50", "최저호가_대비_실거래_괴리(억원)": "+1.10", "호가_실거래_관계_및_정책반응_해석": "유예 마감 직전 9일간 9건 막판 절세 매물 대량 소화", "출처_URL": "https://cy-on.kr/trades/7960/"}, {"계약일_또는_기준일": "2026-05-09", "연월_주차_구분": "2026-W19 (5월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강동", "법정동_지역": "서울 강동구 둔촌동", "단지명": "올림픽파크포레온", "총세대수": "12032", "전용면적(㎡)": "84.99", "실거래가(억원)": "28.00", "층_또는_거래건수": "5월 25건 중앙값(평균 27.82억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "27.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.50", "호가_실거래_관계_및_정책반응_해석": "5월 매매 25건(마감 주말 40건+) 완판 후 강동구 매물 3일 만에 -19.1% 급감", "출처_URL": "https://cy-on.kr/trades/8574/"}, {"계약일_또는_기준일": "2026-05-09", "연월_주차_구분": "2026-W19 (5월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "33.00", "층_또는_거래건수": "5/1~5/9 3건 중앙값", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "27.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "12.50", "당시_전세호가_59㎡(억원)": "9.50", "최저호가_대비_실거래_괴리(억원)": "+6.00", "호가_실거래_관계_및_정책반응_해석": "마감 직전 최저호가 27.0억 바닥 확인 및 막판 급매 소진 완료", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-05-09", "연월_주차_구분": "2026-W19 (5월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "트리지움", "총세대수": "3696", "전용면적(㎡)": "84.83", "실거래가(억원)": "31.10", "층_또는_거래건수": "5/1~5/9 6건 중앙값", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "유예 마감 직전 9일간 6건 집중 체결", "출처_URL": "https://cy-on.kr/trades/7945/"}, {"계약일_또는_기준일": "2026-05-09", "연월_주차_구분": "2026-W19 (5월 2주)", "정책_국면_구분": "03_종료확정발표~유예마감 (2026.02.12~05.09, 절세급매소화기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 신천동", "단지명": "파크리오", "총세대수": "6864", "전용면적(㎡)": "84.79", "실거래가(억원)": "27.95", "층_또는_거래건수": "5/1~5/9 8건 중앙값", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "유예 마감 직전 9일간 8건 집중 체결(27.95억 저점 소화)", "출처_URL": "https://cy-on.kr/trades/7961/"}, {"계약일_또는_기준일": "2026-05-12", "연월_주차_구분": "2026-W20 (5월 2주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(서초)", "법정동_지역": "서울 서초구 반포동", "단지명": "래미안원베일리", "총세대수": "2990", "전용면적(㎡)": "84.95", "실거래가(억원)": "53.50", "층_또는_거래건수": "2층", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "50.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "18.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+3.50", "호가_실거래_관계_및_정책반응_해석": "중과 재개 직후 2층 저층 거래(서초구 매물 -15.49% 급감)", "출처_URL": "https://www.mk.co.kr/news/realestate/12106323"}, {"계약일_또는_기준일": "2026-05-16", "연월_주차_구분": "2026-W20 (5월 3주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "동탄", "법정동_지역": "화성시 여울동", "단지명": "동탄역롯데캐슬", "총세대수": "940", "전용면적(㎡)": "84.70", "실거래가(억원)": "20.80", "층_또는_거래건수": "39층", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "5월 비규제 지역 대체수요 유입으로 전용 84㎡ 20.8억 안착", "출처_URL": "https://biz.heraldcorp.com/article/10899528"}, {"계약일_또는_기준일": "2026-05-16", "연월_주차_구분": "2026-W20 (5월 3주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을7단지상록", "총세대수": "670", "전용면적(㎡)": "84.00", "실거래가(억원)": "13.80", "층_또는_거래건수": "단건(5월 2건 평균 13.83억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "13.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "6.63(평균)", "당시_전세호가_59㎡(억원)": "0(매물없음)", "최저호가_대비_실거래_괴리(억원)": "+0.30", "호가_실거래_관계_및_정책반응_해석": "260525·260712 시트 기재: 매매 최저호가 13.5억 고정 속 13.8억 보합 거래", "출처_URL": "https://apt.k9gle.com/apt/7704/풍덕천동-신정7단지-상록-공무원"}, {"계약일_또는_기준일": "2026-05-19", "연월_주차_구분": "2026-W21 (5월 3주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "32.80", "층_또는_거래건수": "단건(5/10~31 7건 중앙값 32.8억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "29.90", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.95", "당시_전세호가_59㎡(억원)": "9.95", "최저호가_대비_실거래_괴리(억원)": "+2.90", "호가_실거래_관계_및_정책반응_해석": "260525 시트 핵심: 최저호가가 5/2 27.0억 → 5/25 29.9억(+10.7%)으로 실거래보다 선행 급반등", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-05-21", "연월_주차_구분": "2026-W21 (5월 3주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "17.20", "층_또는_거래건수": "31층(5월 6건 중앙값 17.2억, 평균 17.36억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "17.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-0.30", "호가_실거래_관계_및_정책반응_해석": "260525 시트 기재: 전세호가(10→11억) 및 최저호가(17.5억) 상승 속 5월 17.2억 소화", "출처_URL": "https://www.jipgap.com/complex/41117/광교중흥에스클래스"}, {"계약일_또는_기준일": "2026-05-22", "연월_주차_구분": "2026-W21 (5월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강동", "법정동_지역": "서울 강동구 고덕동", "단지명": "고덕그라시움", "총세대수": "4932", "전용면적(㎡)": "84.04", "실거래가(억원)": "23.60", "층_또는_거래건수": "단건(5월 5건 평균 24.60억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "24.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.00", "당시_전세호가_59㎡(억원)": "8.00", "최저호가_대비_실거래_괴리(억원)": "-0.40", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 5/22 23.6억 저가 매물 소화 후 최저호가 24.0억 지지", "출처_URL": "https://kbland.kr/se/c/34391"}, {"계약일_또는_기준일": "2026-05-25", "연월_주차_구분": "2026-W22 (5월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "수지/광교", "법정동_지역": "용인시 수지구 상현동", "단지명": "광교자이더클래스", "총세대수": "445", "전용면적(㎡)": "84.00", "실거래가(억원)": "15.25", "층_또는_거래건수": "단건(5월 3건 중앙값 14.5억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "15.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.85", "당시_전세호가_59㎡(억원)": "6.50", "최저호가_대비_실거래_괴리(억원)": "+0.25", "호가_실거래_관계_및_정책반응_해석": "260525 시트 기재: 최저호가(14.8→15.0억) 상승과 함께 15.25억 돌파", "출처_URL": "https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스"}, {"계약일_또는_기준일": "2026-05-25", "연월_주차_구분": "2026-W22 (5월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "성남수정", "법정동_지역": "성남시 수정구 신흥동", "단지명": "산성역포레스티아", "총세대수": "4089", "전용면적(㎡)": "84.92", "실거래가(억원)": "15.20", "층_또는_거래건수": "5월 7건 중앙값(평균 15.27억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "20.00(이상치)", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "0(매물없음)", "당시_전세호가_59㎡(억원)": "6.50", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "260525 시트: 84㎡ 전세 매물 소진(0) 및 매매 최저호가 일시 20억(대형/입력 이상치) 기록", "출처_URL": "https://apthi.kr/apttrade/411316951/202602"}, {"계약일_또는_기준일": "2026-05-29", "연월_주차_구분": "2026-W22 (5월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(강남)", "법정동_지역": "서울 강남구 개포동", "단지명": "디에이치퍼스티어아이파크", "총세대수": "6702", "전용면적(㎡)": "84.90", "실거래가(억원)": "34.30", "층_또는_거래건수": "8층(익일 5/30 9층 35.3억)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "33.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "14.50", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.80", "호가_실거래_관계_및_정책반응_해석": "강남구 12주 만에 상승 전환 후 개포 대장주 연속 상승 거래 체결", "출처_URL": "https://www.lantertainer.com/complex?id=36ec2b6c-d95b-4309-b8ea-1d053cac3d02"}, {"계약일_또는_기준일": "2026-05-30", "연월_주차_구분": "2026-W22 (5월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "위례(송파)", "법정동_지역": "서울 송파구 장지동", "단지명": "위례중앙푸르지오1단지", "총세대수": "163", "전용면적(㎡)": "84.73", "실거래가(억원)": "15.30", "층_또는_거래건수": "단건(특수/직거래성)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "23.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "0(매물없음)", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-7.70", "호가_실거래_관계_및_정책반응_해석": "260712 시트: 최저호가는 21.5→23.0억으로 오히려 올랐으나 15.3억 특수 단건 거래 발생", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-05-31", "연월_주차_구분": "2026-W22 (5월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "e편한세상수지", "총세대수": "1237", "전용면적(㎡)": "84.00", "실거래가(억원)": "15.94", "층_또는_거래건수": "5/10~31 4건 중앙값(5월 5건 15.9억)", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "중과 시행 직후 16억 턱밑까지 연속 상승", "출처_URL": "https://www.jipgap.com/complex/41465/e%ED%8E%B8%ED%95%9C%EC%84%B8%EC%83%81%EC%88%98%EC%A7%80"}, {"계약일_또는_기준일": "2026-05-31", "연월_주차_구분": "2026-W22 (5월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강동", "법정동_지역": "서울 강동구 상일동", "단지명": "고덕아르테온", "총세대수": "4066", "전용면적(㎡)": "84.93", "실거래가(억원)": "22.30", "층_또는_거래건수": "5/10~31 3건 중앙값(5월 5건 22.6억)", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "4월(21.5억) 대비 5월 22.3~22.6억으로 레벨업", "출처_URL": "https://aptmap.net/apt/8943"}, {"계약일_또는_기준일": "2026-05-31", "연월_주차_구분": "2026-W22 (5월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "리센츠", "총세대수": "5563", "전용면적(㎡)": "84.99", "실거래가(억원)": "34.10", "층_또는_거래건수": "5/10~31 6건 중앙값(5월 15건 평균 33.73억)", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "32.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "13.50", "당시_전세호가_59㎡(억원)": "0(매물없음)", "최저호가_대비_실거래_괴리(억원)": "+1.60", "호가_실거래_관계_및_정책반응_해석": "유예 마감 전(33.5억) 대비 중과 시행 후(34.1억) 즉각 +0.6억 반등", "출처_URL": "https://cy-on.kr/trades/7960/"}, {"계약일_또는_기준일": "2026-05-31", "연월_주차_구분": "2026-W22 (5월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "16.90", "층_또는_거래건수": "5/10~31 4건 중앙값(5월 7건 16.6억)", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "16.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.40", "호가_실거래_관계_및_정책반응_해석": "5월 전반(16.3억) → 5월 후반(16.9억)으로 조기 반등(수지 리모델링 이주 수요 가세)", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2026-05-31", "연월_주차_구분": "2026-W22 (5월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "트리지움", "총세대수": "3696", "전용면적(㎡)": "84.83", "실거래가(억원)": "32.10", "층_또는_거래건수": "5/10~31 6건 중앙값(5월 12건 31.4억)", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "유예 마감 전(31.1억) 대비 중과 시행 후(32.1억) +1.0억 즉각 반등", "출처_URL": "https://cy-on.kr/trades/7945/"}, {"계약일_또는_기준일": "2026-05-31", "연월_주차_구분": "2026-W22 (5월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 신천동", "단지명": "파크리오", "총세대수": "6864", "전용면적(㎡)": "84.79", "실거래가(억원)": "28.50", "층_또는_거래건수": "5/10~31 9건 중앙값(5월 17건 28.25억)", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "유예 마감 전(27.95억) 대비 중과 시행 후(28.50억) +0.55억 반등", "출처_URL": "https://cy-on.kr/trades/7961/"}, {"계약일_또는_기준일": "2026-05-31", "연월_주차_구분": "2026-W22 (5월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 가락동", "단지명": "헬리오시티", "총세대수": "9510", "전용면적(㎡)": "84.95", "실거래가(억원)": "28.60", "층_또는_거래건수": "5/10~31 6건 중앙값(5월 17건 28.1억)", "데이터_출처유형": "국토부 실거래(기간중앙값)", "당시_매도최저호가(억원)": "26.20", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.95", "당시_전세호가_59㎡(억원)": "9.95", "최저호가_대비_실거래_괴리(억원)": "+2.40", "호가_실거래_관계_및_정책반응_해석": "최저호가는 26.2억까지 후행 조정되었으나 실거래 중앙값은 28.0→28.6억으로 선행 반등", "출처_URL": "https://cy-on.kr/trades/8014/"}, {"계약일_또는_기준일": "2026-06-02", "연월_주차_구분": "2026-W23 (6월 1주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(강남)", "법정동_지역": "서울 강남구 개포동", "단지명": "디에이치퍼스티어아이파크", "총세대수": "6702", "전용면적(㎡)": "84.90", "실거래가(억원)": "45.50", "층_또는_거래건수": "28층 신고가(6/12 37.75억, 6/20 35.0억)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "33.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "14.50", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+12.00", "호가_실거래_관계_및_정책반응_해석": "개포 대장주 로열층 45.5억 신고가 경신", "출처_URL": "https://www.lantertainer.com/complex?id=36ec2b6c-d95b-4309-b8ea-1d053cac3d02"}, {"계약일_또는_기준일": "2026-06-04", "연월_주차_구분": "2026-W23 (6월 1주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "동탄", "법정동_지역": "화성시 여울동", "단지명": "동탄역롯데캐슬", "총세대수": "940", "전용면적(㎡)": "84.70", "실거래가(억원)": "22.25", "층_또는_거래건수": "33층(신고가 경신)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2월(18.8억) 대비 +3.45억 급등하며 신고가 경신(이후 7/1 규제지역 지정 배경)", "출처_URL": "https://biz.heraldcorp.com/article/10899528"}, {"계약일_또는_기준일": "2026-06-06", "연월_주차_구분": "2026-W23 (6월 1주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "동탄", "법정동_지역": "화성시 청계동", "단지명": "동탄역시범더샵센트럴시티", "총세대수": "1445", "전용면적(㎡)": "84.00", "실거래가(억원)": "20.50", "층_또는_거래건수": "단건(신고가)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "동탄역 시범단지 국민평형 20.5억 돌파", "출처_URL": "https://www.mt.co.kr/estate/2026/06/15/2026061419334167381"}, {"계약일_또는_기준일": "2026-06-15", "연월_주차_구분": "2026-W25 (6월 3주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "위례(송파)", "법정동_지역": "서울 송파구 장지동", "단지명": "위례중앙푸르지오1단지", "총세대수": "163", "전용면적(㎡)": "84.73", "실거래가(억원)": "20.60", "층_또는_거래건수": "단건(아실 차트 관측)", "데이터_출처유형": "261011 엑셀 캡처", "당시_매도최저호가(억원)": "22.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-1.40", "호가_실거래_관계_및_정책반응_해석": "5/30 특수 저가거래(15.3억) 직후 6월 정상 매매는 20.6억에 체결(호가 22억)", "출처_URL": "https://kbland.kr/se/c/29924"}, {"계약일_또는_기준일": "2026-06-18", "연월_주차_구분": "2026-W25 (6월 3주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "18.40", "층_또는_거래건수": "단건(6월 3건 중앙값 18.4억, 6/20 18.6억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "18.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.40", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 5월(17.2억) 대비 +1.2억 급반등하며 최저호가(18.0억) 추월", "출처_URL": "https://www.jipgap.com/complex/41117/광교중흥에스클래스"}, {"계약일_또는_기준일": "2026-06-19", "연월_주차_구분": "2026-W25 (6월 3주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "분당", "법정동_지역": "성남시 분당구 정자동", "단지명": "파크뷰", "총세대수": "1829", "전용면적(㎡)": "84.99", "실거래가(억원)": "26.40", "층_또는_거래건수": "20층", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "27.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "15.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-0.60", "호가_실거래_관계_및_정책반응_해석": "4월 신고가(26.5억) 수준인 26.4억 견조하게 유지", "출처_URL": "https://cheongyak.com/sold/11809"}, {"계약일_또는_기준일": "2026-06-20", "연월_주차_구분": "2026-W25 (6월 3주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "성남수정", "법정동_지역": "성남시 수정구 신흥동", "단지명": "산성역포레스티아", "총세대수": "4089", "전용면적(㎡)": "84.92", "실거래가(억원)": "17.00", "층_또는_거래건수": "단건(6월 6건 중앙값 15.9억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "16.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "6.80", "당시_전세호가_59㎡(억원)": "6.50", "최저호가_대비_실거래_괴리(억원)": "+1.00", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 최저호가 16.0억 정상화 및 실거래 최고 17.0억 돌파", "출처_URL": "https://apthi.kr/apttrade/411316951/202602"}, {"계약일_또는_기준일": "2026-06-22", "연월_주차_구분": "2026-W26 (6월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "수지/광교", "법정동_지역": "용인시 수지구 상현동", "단지명": "광교자이더클래스", "총세대수": "445", "전용면적(㎡)": "84.00", "실거래가(억원)": "15.475", "층_또는_거래건수": "6월 4건 중앙값(6/22 저층 단건 13.8억 병존)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "15.20", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.50", "당시_전세호가_59㎡(억원)": "7.20", "최저호가_대비_실거래_괴리(억원)": "+0.28", "호가_실거래_관계_및_정책반응_해석": "260712 시트 단건은 13.8억이나 6월 전체 4건 중앙값은 15.475억으로 상승 확대", "출처_URL": "https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스"}, {"계약일_또는_기준일": "2026-06-24", "연월_주차_구분": "2026-W26 (6월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(서초)", "법정동_지역": "서울 서초구 반포동", "단지명": "래미안원베일리", "총세대수": "2990", "전용면적(㎡)": "84.95", "실거래가(억원)": "56.30", "층_또는_거래건수": "20층", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "53.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "18.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+2.80", "호가_실거래_관계_및_정책반응_해석": "5/12 2층(53.5억) 이후 6/24 20층 56.3억으로 회복 거래(매일경제 보도)", "출처_URL": "https://www.mk.co.kr/news/realestate/12106323"}, {"계약일_또는_기준일": "2026-06-24", "연월_주차_구분": "2026-W26 (6월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "11.90", "층_또는_거래건수": "단건(6월 4건 중앙값 12.0억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "12.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.10", "최저호가_대비_실거래_괴리(억원)": "-0.60", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 5월 실거래 선행 상승(12.5억) 후 최저호가가 11.5→12.5억으로 후행 상향", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-06-24", "연월_주차_구분": "2026-W26 (6월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.88", "실거래가(억원)": "33.80", "층_또는_거래건수": "6월 5건 중앙값(260712시트 6/24 33.0억 병존)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "32.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "12.90", "당시_전세호가_59㎡(억원)": "10.45", "최저호가_대비_실거래_괴리(억원)": "+1.80", "호가_실거래_관계_및_정책반응_해석": "5월 후반 최저호가 선행 반등(29.9억)에 이어 6월 실거래 중앙값 33.8억 본격 회복", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-06-25", "연월_주차_구분": "2026-W26 (6월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강동", "법정동_지역": "서울 강동구 둔촌동", "단지명": "올림픽파크포레온", "총세대수": "12032", "전용면적(㎡)": "84.99", "실거래가(억원)": "31.30", "층_또는_거래건수": "단건(6월 3건 중앙값 31.3억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "29.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "14.00", "당시_전세호가_59㎡(억원)": "0(매물없음)", "최저호가_대비_실거래_괴리(억원)": "+2.30", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 급매 저점(27.2~27.5억) 대비 +3.8~4.1억 V자 급반등(전세호가 10→14억)", "출처_URL": "https://cy-on.kr/trades/8574/"}, {"계약일_또는_기준일": "2026-06-26", "연월_주차_구분": "2026-W26 (6월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "17.00", "층_또는_거래건수": "단건(6월 12건 중앙값 16.95억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "17.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-0.50", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 최저호가 16.5→17.5억 선행 상향 및 6월 12건 대량 거래로 17억 안착", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2026-06-27", "연월_주차_구분": "2026-W26 (6월 4주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "주공9단지", "총세대수": "812", "전용면적(㎡)": "59.00", "실거래가(억원)": "12.15", "층_또는_거래건수": "단건", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "12.80", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.20", "최저호가_대비_실거래_괴리(억원)": "-0.65", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 실거래 11.3→11.6→12.15억 상승 및 최저호가 11.0→12.8억 점프", "출처_URL": "https://disco.re/l/s690ci"}, {"계약일_또는_기준일": "2026-06-29", "연월_주차_구분": "2026-W26 (6월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "리센츠", "총세대수": "5563", "전용면적(㎡)": "84.99", "실거래가(억원)": "34.95", "층_또는_거래건수": "6월 10건 중앙값(6/27 36.0억, 6/29 33.7억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "32.90", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "13.95", "당시_전세호가_59㎡(억원)": "12.00", "최저호가_대비_실거래_괴리(억원)": "+2.05", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재: 5월 중앙값(33.55억) 대비 +1.4억 상승, 전세호가 13.95억 최고치", "출처_URL": "https://cy-on.kr/trades/7960/"}, {"계약일_또는_기준일": "2026-06-30", "연월_주차_구분": "2026-W27 (6월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "e편한세상수지", "총세대수": "1237", "전용면적(㎡)": "84.00", "실거래가(억원)": "16.35", "층_또는_거래건수": "6월 6건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "5월(15.9억) 대비 +0.45억 상승하며 16억대 안착", "출처_URL": "https://www.jipgap.com/complex/41465/e%ED%8E%B8%ED%95%9C%EC%84%B8%EC%83%81%EC%88%98%EC%A7%80"}, {"계약일_또는_기준일": "2026-06-30", "연월_주차_구분": "2026-W27 (6월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강동", "법정동_지역": "서울 강동구 고덕동", "단지명": "고덕그라시움", "총세대수": "4932", "전용면적(㎡)": "84.04", "실거래가(억원)": "25.20", "층_또는_거래건수": "6월 말 정상거래(25.0~25.45억)", "데이터_출처유형": "국토부 실거래(월말거래)", "당시_매도최저호가(억원)": "24.90", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.00", "당시_전세호가_59㎡(억원)": "8.50", "최저호가_대비_실거래_괴리(억원)": "+0.30", "호가_실거래_관계_및_정책반응_해석": "260712 시트 최저호가 24.9억 및 전세호가 11.0억 상향과 함께 25억대 회복", "출처_URL": "https://kbland.kr/se/c/34391"}, {"계약일_또는_기준일": "2026-06-30", "연월_주차_구분": "2026-W27 (6월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강동", "법정동_지역": "서울 강동구 상일동", "단지명": "고덕아르테온", "총세대수": "4066", "전용면적(㎡)": "84.93", "실거래가(억원)": "22.55", "층_또는_거래건수": "6월 4건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "강동구 전세 강세에 힘입어 22.55억 지지", "출처_URL": "https://aptmap.net/apt/8943"}, {"계약일_또는_기준일": "2026-06-30", "연월_주차_구분": "2026-W27 (6월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "트리지움", "총세대수": "3696", "전용면적(㎡)": "84.83", "실거래가(억원)": "31.40", "층_또는_거래건수": "6월 5건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "거래량 축소(12건→5건) 속 31.4억 지지", "출처_URL": "https://cy-on.kr/trades/7945/"}, {"계약일_또는_기준일": "2026-06-30", "연월_주차_구분": "2026-W27 (6월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 신천동", "단지명": "파크리오", "총세대수": "6864", "전용면적(㎡)": "84.79", "실거래가(억원)": "29.60", "층_또는_거래건수": "6월 5건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "5월 중앙값(28.25억) 대비 한 달 만에 +1.35억 상승", "출처_URL": "https://cy-on.kr/trades/7961/"}, {"계약일_또는_기준일": "2026-06-30", "연월_주차_구분": "2026-W27 (6월 5주)", "정책_국면_구분": "04_양도세중과재개_초기 (2026.05.10~06.30, 매물잠김·조기반등기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 가락동", "단지명": "헬리오시티", "총세대수": "9510", "전용면적(㎡)": "84.95", "실거래가(억원)": "28.20", "층_또는_거래건수": "6월 7건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "28.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "12.10", "당시_전세호가_59㎡(억원)": "10.20", "최저호가_대비_실거래_괴리(억원)": "-0.30", "호가_실거래_관계_및_정책반응_해석": "6월 실거래는 28.2억이나 7/12 최저호가(28.5억) 및 전세호가(12.1억)가 동반 급등", "출처_URL": "https://cy-on.kr/trades/8014/"}, {"계약일_또는_기준일": "2026-07-04", "연월_주차_구분": "2026-W27 (7월 1주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 가락동", "단지명": "헬리오시티", "총세대수": "9510", "전용면적(㎡)": "84.95", "실거래가(억원)": "29.00", "층_또는_거래건수": "단건(7월 전체 3건 중앙값 30.0억)", "데이터_출처유형": "261011 엑셀 및 실거래", "당시_매도최저호가(억원)": "28.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "12.10", "당시_전세호가_59㎡(억원)": "10.20", "최저호가_대비_실거래_괴리(억원)": "+0.50", "호가_실거래_관계_및_정책반응_해석": "260712 시트 기재 7/4 29.0억 체결 후 7월 월중앙값 30.0억(3건) 돌파(후기 본격 반등)", "출처_URL": "https://cy-on.kr/trades/8014/"}, {"계약일_또는_기준일": "2026-07-08", "연월_주차_구분": "2026-W28 (7월 2주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(강남)", "법정동_지역": "서울 강남구 압구정동", "단지명": "압구정현대3,4,5,6,7차", "총세대수": "2954", "전용면적(㎡)": "115.00", "실거래가(억원)": "57.00", "층_또는_거래건수": "12층(현대8차 기준)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "49.38(평균)", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "압구정 현대 단지 7월 초 57.0억 실거래 체결", "출처_URL": "https://kbland.kr/c/106"}, {"계약일_또는_기준일": "2026-07-15", "연월_주차_구분": "2026-W29 (7월 3주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "위례(성남)", "법정동_지역": "성남시 수정구 창곡동", "단지명": "위례센트로엘", "총세대수": "673", "전용면적(㎡)": "98.00", "실거래가(억원)": "21.00", "층_또는_거래건수": "7월 1건(전세 8.29억 6건)", "데이터_출처유형": "261011 엑셀 캡처", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.29(평균)", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2026년도 시트 아실 캡처(image10.png): 26년 7월 전용 98㎡ 매매 21.0억 1건 체결", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-07-20", "연월_주차_구분": "2026-W30 (7월 3주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "분당", "법정동_지역": "성남시 분당구 정자동", "단지명": "파크뷰", "총세대수": "1829", "전용면적(㎡)": "124.52", "실거래가(억원)": "29.40", "층_또는_거래건수": "32층", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "분당 파크뷰 전용 124㎡ 7월 29.4억 거래(헤럴드경제 보도)", "출처_URL": "https://biz.heraldcorp.com/article/10899528"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "e편한세상수지", "총세대수": "1237", "전용면적(㎡)": "84.00", "실거래가(억원)": "16.65", "층_또는_거래건수": "7월 8건 중앙값(7/29 최고 17.2억)", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "7월 8건 거래되며 중앙값 16.65억(최고 17.2억)으로 상승폭 확대", "출처_URL": "https://www.jipgap.com/complex/41465/e%ED%8E%B8%ED%95%9C%EC%84%B8%EC%83%81%EC%88%98%EC%A7%80"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강동", "법정동_지역": "서울 강동구 고덕동", "단지명": "고덕그라시움", "총세대수": "4932", "전용면적(㎡)": "84.04", "실거래가(억원)": "24.90", "층_또는_거래건수": "7월 실거래", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "24.90", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "11.00", "당시_전세호가_59㎡(억원)": "8.50", "최저호가_대비_실거래_괴리(억원)": "+0.00", "호가_실거래_관계_및_정책반응_해석": "7월 최저호가(24.9억)와 동일한 24.9억 실거래 체결", "출처_URL": "https://kbland.kr/se/c/34391"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강동", "법정동_지역": "서울 강동구 상일동", "단지명": "고덕아르테온", "총세대수": "4066", "전용면적(㎡)": "84.93", "실거래가(억원)": "22.70", "층_또는_거래건수": "7월 5건 중앙값(미해제 4건 기준 23.075억)", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "7월 중앙값 22.7~23.075억으로 완만한 우상향 지속", "출처_URL": "https://aptmap.net/apt/8943"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지/광교", "법정동_지역": "용인시 수지구 상현동", "단지명": "광교자이더클래스", "총세대수": "445", "전용면적(㎡)": "84.00", "실거래가(억원)": "15.95", "층_또는_거래건수": "7월 3건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "15.20", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.50", "당시_전세호가_59㎡(억원)": "7.20", "최저호가_대비_실거래_괴리(억원)": "+0.75", "호가_실거래_관계_및_정책반응_해석": "6월(15.475억) → 7월(15.95억)으로 후기 상승 가속", "출처_URL": "https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "18.95", "층_또는_거래건수": "7월 2건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "18.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.95", "호가_실거래_관계_및_정책반응_해석": "수원 영통구 하반기 가속과 함께 7월 중앙값 18.95억 돌파", "출처_URL": "https://www.jipgap.com/complex/41117/광교중흥에스클래스"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "리센츠", "총세대수": "5563", "전용면적(㎡)": "84.99", "실거래가(억원)": "34.95", "층_또는_거래건수": "7월 8건 중앙값(15층 최고 37.0억)", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "32.90", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "13.95", "당시_전세호가_59㎡(억원)": "12.00", "최저호가_대비_실거래_괴리(억원)": "+2.05", "호가_실거래_관계_및_정책반응_해석": "7월 중앙값 34.95억 유지 및 15층 37.0억 신고가 거래 발생", "출처_URL": "https://cy-on.kr/trades/7960/"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "성남수정", "법정동_지역": "성남시 수정구 신흥동", "단지명": "산성역포레스티아", "총세대수": "4089", "전용면적(㎡)": "84.92", "실거래가(억원)": "15.775", "층_또는_거래건수": "7월 4건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "16.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "6.80", "당시_전세호가_59㎡(억원)": "6.50", "최저호가_대비_실거래_괴리(억원)": "-0.22", "호가_실거래_관계_및_정책반응_해석": "7월 4건 중앙값 15.775억 기록", "출처_URL": "https://apthi.kr/apttrade/411316951/202602"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "17.925", "층_또는_거래건수": "7월 6건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "17.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.43", "호가_실거래_관계_및_정책반응_해석": "7/12 최저호가(17.5억)를 훌쩍 뛰어넘어 7월 실거래 중앙값 17.925억 기록", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을7단지상록", "총세대수": "670", "전용면적(㎡)": "84.00", "실거래가(억원)": "14.00", "층_또는_거래건수": "7월 1건", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "13.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "0(매물없음)", "당시_전세호가_59㎡(억원)": "5.80", "최저호가_대비_실거래_괴리(억원)": "+0.50", "호가_실거래_관계_및_정책반응_해석": "거래 희소 속 7월 14.0억 거래", "출처_URL": "https://apt.k9gle.com/apt/7704/풍덕천동-신정7단지-상록-공무원"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "12.30", "층_또는_거래건수": "7월 5건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "12.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "5.10", "최저호가_대비_실거래_괴리(억원)": "-0.20", "호가_실거래_관계_및_정책반응_해석": "6월(12.0억) 대비 +0.3억 상승한 12.3억 기록", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강동", "법정동_지역": "서울 강동구 둔촌동", "단지명": "올림픽파크포레온", "총세대수": "12032", "전용면적(㎡)": "84.99", "실거래가(억원)": "30.00", "층_또는_거래건수": "7월 1건", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "29.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "14.00", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+1.00", "호가_실거래_관계_및_정책반응_해석": "6월 급등(31.3억) 후 매물 잠김 속 7월 단 1건(30.0억) 체결", "출처_URL": "https://cy-on.kr/trades/8574/"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "33.80", "층_또는_거래건수": "7월 15건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "32.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "12.90", "당시_전세호가_59㎡(억원)": "10.45", "최저호가_대비_실거래_괴리(억원)": "+1.80", "호가_실거래_관계_및_정책반응_해석": "7월 거래 15건에서도 중앙값 33.8억 견조하게 유지", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "트리지움", "총세대수": "3696", "전용면적(㎡)": "84.83", "실거래가(억원)": "32.00", "층_또는_거래건수": "7월 7건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "6월(31.4억) 대비 +0.6억 재상승하며 32.0억 안착", "출처_URL": "https://cy-on.kr/trades/7945/"}, {"계약일_또는_기준일": "2026-07-31", "연월_주차_구분": "2026-W31 (7월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 신천동", "단지명": "파크리오", "총세대수": "6864", "전용면적(㎡)": "84.79", "실거래가(억원)": "29.50", "층_또는_거래건수": "7월 9건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "7월 9건 거래 중앙값 29.5억 유지", "출처_URL": "https://cy-on.kr/trades/7961/"}, {"계약일_또는_기준일": "2026-08-22", "연월_주차_구분": "2026-W34 (8월 4주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강동", "법정동_지역": "서울 강동구 둔촌동", "단지명": "올림픽파크포레온", "총세대수": "12032", "전용면적(㎡)": "84.99", "실거래가(억원)": "30.50", "층_또는_거래건수": "8/22 단건(8월 5건 중앙값 30.0억)", "데이터_출처유형": "국토부 실거래(계약일)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "8월 5건 중앙값 30.0억, 8/22 30.5억 체결", "출처_URL": "https://cy-on.kr/trades/8574/"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "e편한세상수지", "총세대수": "1237", "전용면적(㎡)": "84.00", "실거래가(억원)": "16.80", "층_또는_거래건수": "8월 3건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "연초(14.95억) 대비 +1.85억 상승한 16.8억 기록", "출처_URL": "https://www.jipgap.com/complex/41465/e%ED%8E%B8%ED%95%9C%EC%84%B8%EC%83%81%EC%88%98%EC%A7%80"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강동", "법정동_지역": "서울 강동구 상일동", "단지명": "고덕아르테온", "총세대수": "4066", "전용면적(㎡)": "84.93", "실거래가(억원)": "23.35", "층_또는_거래건수": "8월 3건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "4월(21.5억) 대비 +1.85억 오른 23.35억 기록", "출처_URL": "https://aptmap.net/apt/8943"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지/광교", "법정동_지역": "용인시 수지구 상현동", "단지명": "광교자이더클래스", "총세대수": "445", "전용면적(㎡)": "84.00", "실거래가(억원)": "16.40", "층_또는_거래건수": "8월 3건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "8월 3건 중앙값 16.40억으로 연중 최고치 기록", "출처_URL": "https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "19.50", "층_또는_거래건수": "8월 3건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "5월(17.2억) → 6월(18.4억) → 7월(18.95억) → 8월(19.50억) 가파른 상승", "출처_URL": "https://www.jipgap.com/complex/41117/광교중흥에스클래스"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "리센츠", "총세대수": "5563", "전용면적(㎡)": "84.99", "실거래가(억원)": "34.65", "층_또는_거래건수": "8월 3건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "8월 거래 3건 중앙값 34.65억 유지", "출처_URL": "https://cy-on.kr/trades/7960/"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "성남수정", "법정동_지역": "성남시 수정구 신흥동", "단지명": "산성역포레스티아", "총세대수": "4089", "전용면적(㎡)": "84.92", "실거래가(억원)": "16.80", "층_또는_거래건수": "8월 1건", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "8월 전용 84㎡ 16.8억 체결", "출처_URL": "https://apthi.kr/apttrade/411316951/202602"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "18.20", "층_또는_거래건수": "8월 5건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "8월 중앙값 18.2억으로 18억대 안착", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을7단지상록", "총세대수": "670", "전용면적(㎡)": "84.00", "실거래가(억원)": "14.45", "층_또는_거래건수": "8월 2건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "5월(13.83억) 대비 후행하여 8월 14.45억으로 완만한 상승", "출처_URL": "https://apt.k9gle.com/apt/7704/풍덕천동-신정7단지-상록-공무원"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "12.85", "층_또는_거래건수": "8월 2건 중앙값(최고 12.9억)", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "8월 최고 12.9억(중앙값 12.85억) 신고가 경신", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "33.50", "층_또는_거래건수": "8월 3건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "8/3 세제개편안 및 금리인상 관망세로 거래량 3건 축소 속 33.5억 기록", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "트리지움", "총세대수": "3696", "전용면적(㎡)": "84.83", "실거래가(억원)": "32.20", "층_또는_거래건수": "8월 2건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "8월 중앙값 32.20억으로 연중 고점 경신", "출처_URL": "https://cy-on.kr/trades/7945/"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 신천동", "단지명": "파크리오", "총세대수": "6864", "전용면적(㎡)": "84.79", "실거래가(억원)": "29.50", "층_또는_거래건수": "8월 1건", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "매물 잠김으로 8월 1건(29.5억) 체결", "출처_URL": "https://cy-on.kr/trades/7961/"}, {"계약일_또는_기준일": "2026-08-31", "연월_주차_구분": "2026-W35 (8월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 가락동", "단지명": "헬리오시티", "총세대수": "9510", "전용면적(㎡)": "84.95", "실거래가(억원)": "29.00", "층_또는_거래건수": "8월 3건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "8월 3건 중앙값 29.0억 기록", "출처_URL": "https://cy-on.kr/trades/8014/"}, {"계약일_또는_기준일": "2026-09-15", "연월_주차_구분": "2026-W38 (9월 3주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "위례(송파)", "법정동_지역": "서울 송파구 장지동", "단지명": "위례중앙푸르지오1단지", "총세대수": "163", "전용면적(㎡)": "84.73", "실거래가(억원)": "거래없음(호가22.0)", "층_또는_거래건수": "9월 매매 0건 / 전세 8.7억(1건)", "데이터_출처유형": "261011 엑셀 캡처", "당시_매도최저호가(억원)": "22.00", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "8.70(실거래)", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2026년도 시트 아실 캡처(image8.png): 9월 매매 거래내역 없음, 전세 8.7억 1건", "출처_URL": "https://kbland.kr/se/c/29924"}, {"계약일_또는_기준일": "2026-09-15", "연월_주차_구분": "2026-W38 (9월 3주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "위례(하남)", "법정동_지역": "하남시 학암동", "단지명": "위례포레자이", "총세대수": "558", "전용면적(㎡)": "95.00", "실거래가(억원)": "거래없음(호가16.5)", "층_또는_거래건수": "9월 매매 0건 / 전세 6.8억(1건)", "데이터_출처유형": "261011 엑셀 캡처", "당시_매도최저호가(억원)": "16.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "6.80(실거래)", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2026년도 시트 아실 캡처(image9.png): 9월 매매 거래내역 없음, 전세 6.8억 1건", "출처_URL": "https://m.richgo.ai/realty/danji/a2emHhz"}, {"계약일_또는_기준일": "2026-09-25", "연월_주차_구분": "2026-W39 (9월 4주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "광교", "법정동_지역": "수원시 영통구 이의동", "단지명": "자연앤자이1단지", "총세대수": "273", "전용면적(㎡)": "116.00", "실거래가(억원)": "19.875", "층_또는_거래건수": "9월 2건 평균(전세 10.5억 1건)", "데이터_출처유형": "261011 엑셀 캡처", "당시_매도최저호가(억원)": "19.50", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "10.50", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "+0.38", "호가_실거래_관계_및_정책반응_해석": "2026년도 시트 아실 캡처(image16.png): 5월(17.0억) 대비 +2.875억 오른 19.875억(2건)", "출처_URL": "https://drive.google.com/file/d/1pEioyw_5eQWZ7Xx2UZC39eFYbgElsa6D/view?usp=drivesdk"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강동", "법정동_지역": "서울 강동구 고덕동", "단지명": "고덕그라시움", "총세대수": "4932", "전용면적(㎡)": "84.04", "실거래가(억원)": "24.50", "층_또는_거래건수": "9월 단건(10월 시세 25.5억)", "데이터_출처유형": "국토부 실거래(월기준)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "9월 실거래 24.5억 관측(재개발닷컴 10월 초 기준 84㎡ 25.5억)", "출처_URL": "https://kbland.kr/se/c/34391"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지/광교", "법정동_지역": "용인시 수지구 상현동", "단지명": "광교자이더클래스", "총세대수": "445", "전용면적(㎡)": "84.00", "실거래가(억원)": "16.15", "층_또는_거래건수": "9월 2건 중앙값/평균", "데이터_출처유형": "261011 엑셀 캡처 및 실거래", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "0(거래없음)", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "2026년도 시트 아실 캡처(image15.png): 9월 매매 16.15억(2건), 전세 거래내역 없음", "출처_URL": "https://apt.k9gle.com/apt/7650/상현동-광교자이더클래스"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "광교", "법정동_지역": "수원시 영통구 원천동", "단지명": "광교중흥S-클래스", "총세대수": "2231", "전용면적(㎡)": "84.99", "실거래가(억원)": "19.90", "층_또는_거래건수": "9월 1건", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "5월(17.2억) 대비 +2.70억(+15.7%) 상승한 19.90억으로 20억 턱밑 도달", "출처_URL": "https://www.jipgap.com/complex/41117/광교중흥에스클래스"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "리센츠", "총세대수": "5563", "전용면적(㎡)": "84.99", "실거래가(억원)": "34.80", "층_또는_거래건수": "9월 2건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "9월 거래 절벽(2건) 속 34.80억 고점권 유지", "출처_URL": "https://cy-on.kr/trades/7960/"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 성복동", "단지명": "성복역롯데캐슬골드타운", "총세대수": "2356", "전용면적(㎡)": "84.91", "실거래가(억원)": "18.40", "층_또는_거래건수": "9월 1건(10월 전세 9.5억 2건)", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "9.50(10월실거래)", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "4월 급매 저점(15.4억) 대비 +3.0억(+19.5%) 상승한 18.40억 달성", "출처_URL": "https://www.jipgap.com/complex/41465/성복역롯데캐슬골드타운"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "수지", "법정동_지역": "용인시 수지구 풍덕천동", "단지명": "신정마을주공1단지", "총세대수": "1044", "전용면적(㎡)": "59.00", "실거래가(억원)": "12.00", "층_또는_거래건수": "9월 1건", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "9월 거래량 감소(1건) 속 12.0억 체결", "출처_URL": "https://www.jipgap.com/complex/41465/신정마을주공1"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강동", "법정동_지역": "서울 강동구 둔촌동", "단지명": "올림픽파크포레온", "총세대수": "12032", "전용면적(㎡)": "84.99", "실거래가(억원)": "28.90", "층_또는_거래건수": "9월 1건", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "9월 단 1건(28.9억) 거래", "출처_URL": "https://cy-on.kr/trades/8574/"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "잠실엘스", "총세대수": "5678", "전용면적(㎡)": "84.80", "실거래가(억원)": "33.25", "층_또는_거래건수": "9월 3건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "13.90~14.40(신규전세)", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "9월 매매 3건 중앙값 33.25억(신규 전세 실거래는 13.9~14.4억 강세)", "출처_URL": "https://cy-on.kr/trades/7969/"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 잠실동", "단지명": "트리지움", "총세대수": "3696", "전용면적(㎡)": "84.83", "실거래가(억원)": "32.00", "층_또는_거래건수": "9월 5건 중앙값(9/17 25평 30.0억 신고가)", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "84㎡ 32.0억 유지 및 9/17 전용 59㎡(25평) 30.0억 신고가 경신", "출처_URL": "https://cy-on.kr/trades/7945/"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 신천동", "단지명": "파크리오", "총세대수": "6864", "전용면적(㎡)": "84.79", "실거래가(억원)": "30.75", "층_또는_거래건수": "9월 2건 중앙값", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "5월 초(27.95억) 대비 +2.80억 오른 30.75억으로 30억대 안착", "출처_URL": "https://cy-on.kr/trades/7961/"}, {"계약일_또는_기준일": "2026-09-30", "연월_주차_구분": "2026-W40 (9월 5주)", "정책_국면_구분": "05_양도세중과재개_중후기 (2026.07.01~09.30, 추가규제·세제개편기)", "권역": "강남3구(송파)", "법정동_지역": "서울 송파구 가락동", "단지명": "헬리오시티", "총세대수": "9510", "전용면적(㎡)": "84.95", "실거래가(억원)": "30.55", "층_또는_거래건수": "9월 1건", "데이터_출처유형": "국토부 실거래(월중앙값)", "당시_매도최저호가(억원)": "-", "당시_매도최고호가(억원)": "-", "당시_전세호가_84㎡(억원)": "-", "당시_전세호가_59㎡(억원)": "-", "최저호가_대비_실거래_괴리(억원)": "-", "호가_실거래_관계_및_정책반응_해석": "5월 초(27.97억) 대비 +2.58억 오른 30.55억 기록", "출처_URL": "https://cy-on.kr/trades/8014/"}];
+
+
+let selectedId = "ALL";
+
+
+function parseDate(dStr) {
+  const parts = dStr.split("-");
+  return new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2] || 1)).getTime();
+}
+
+
+const MIN_TIME = parseDate("2025-06-01");
+const MAX_TIME = parseDate("2026-10-05");
+
+
+const POLICY_LINES = [
+  { d: "2026-01-23", label: "1/23 연장불가 시사", sub: "대통령 SNS 발언", color: "#d97706", dy: 24 },
+  { d: "2026-02-12", label: "2/12 종료·보완 발표", sub: "잔금·실거주 유예", color: "#dc2626", dy: 52 },
+  { d: "2026-05-09", label: "5/9 유예종료·5/10 중과시행", sub: "다주택 중과세 재개", color: "#1e3a8a", dy: 24 },
+  { d: "2026-07-01", label: "7/1 동탄·기흥 규제지정", sub: "조정지역·토허구역", color: "#7c3aed", dy: 52 },
+  { d: "2026-08-03", label: "8/3 세제개편안 발표", sub: "8/27 한은 금리인상", color: "#475569", dy: 24 }
+];
+
+
+const MONTHS = [
+  "2025-06-01","2025-07-01","2025-08-01","2025-09-01","2025-10-01","2025-11-01","2025-12-01",
+  "2026-01-01","2026-02-01","2026-03-01","2026-04-01","2026-05-01","2026-06-01","2026-07-01","2026-08-01","2026-09-01"
+];
+
+
+function renderButtons() {
+  const container = document.getElementById("aptBtnContainer");
+  let html = `<button class="apt-btn ${selectedId === 'ALL' ? 'active' : ''}" onclick="selectApt('ALL')">전체 단지 비교 (12개)</button>`;
+  for (const c of COMPLEXES) {
+    const active = selectedId === c.id ? "active" : "";
+    html += `<button class="apt-btn ${active}" onclick="selectApt('${c.id}')"><span class="dot" style="background:${c.color}"></span>${c.name}</button>`;
+  }
+  container.innerHTML = html;
+}
+
+
+function selectApt(id) {
+  selectedId = id;
+  renderButtons();
+  renderChart();
+  const statusEl = document.getElementById("chartStatusText");
+  if (id === "ALL") {
+    statusEl.innerHTML = `<strong>현재 보기:</strong> 전체 12개 핵심 단지 실거래가 추이 비교 (2025.06 ~ 2026.09) — 개별 단지를 클릭하면 최저호가·전세호가 보조선과 함께 확대됩니다.`;
+    document.getElementById("searchInput").value = "";
+  } else {
+    const c = COMPLEXES.find(x => x.id === id);
+    statusEl.innerHTML = `<strong>단독 확대 보기:</strong> <span style="color:${c.color};font-weight:800;">${c.name}</span> — ${c.rank} (실선: 실거래가 / 파란점선: 매도최저호가 / 초록점선: 전세호가)`;
+    document.getElementById("searchInput").value = c.name.split(" ")[0];
+  }
+  renderTable();
+}
+
+
+function renderChart() {
+  const svg = document.getElementById("priceChartSvg");
+  const W = 1260, H = 540;
+  const padL = 68, padR = 135, padT = 76, padB = 52;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+
+  const activeList = selectedId === "ALL" ? COMPLEXES : COMPLEXES.filter(x => x.id === selectedId);
+
+
+  let minP = Infinity, maxP = -Infinity;
+  for (const c of activeList) {
+    for (const pt of c.tx) {
+      if (pt.p < minP) minP = pt.p;
+      if (pt.p > maxP) maxP = pt.p;
+    }
+    if (selectedId !== "ALL") {
+      for (const pt of c.ask) {
+        if (pt.p < minP) minP = pt.p;
+        if (pt.p > maxP) maxP = pt.p;
+      }
+      for (const pt of c.jeonse) {
+        if (pt.p < minP) minP = pt.p;
+        if (pt.p > maxP) maxP = pt.p;
+      }
+    }
+  }
+  if (selectedId === "ALL") {
+    minP = 8;
+    maxP = 66;
+  } else {
+    const span = Math.max(4, maxP - minP);
+    minP = Math.max(0, Math.floor(minP - span * 0.15));
+    maxP = Math.ceil(maxP + span * 0.15);
+  }
+
+
+  const xOf = (dStr) => padL + ((parseDate(dStr) - MIN_TIME) / (MAX_TIME - MIN_TIME)) * plotW;
+  const yOf = (p) => padT + plotH - ((p - minP) / (maxP - minP)) * plotH;
+
+
+  let out = `<rect x="0" y="0" width="${W}" height="${H}" fill="#ffffff" onclick="if(selectedId!=='ALL') selectApt('ALL')" style="cursor:pointer;"/>`;
+
+
+  // Shaded policy window (2026-02-12 ~ 2026-05-09)
+  const xFeb = xOf("2026-02-12");
+  const xMay = xOf("2026-05-09");
+  out += `<rect x="${xFeb}" y="${padT}" width="${xMay - xFeb}" height="${plotH}" fill="#fef2f2" opacity="0.55" pointer-events="none"/>`;
+  out += `<text x="${(xFeb + xMay)/2}" y="${padT + 16}" text-anchor="middle" font-size="11" font-weight="700" fill="#dc2626">다주택 절세 급매 집중 소화기 (2/12~5/9)</text>`;
+
+
+  // Horizontal grid lines
+  const steps = 6;
+  for (let i = 0; i <= steps; i++) {
+    const val = minP + ((maxP - minP) / steps) * i;
+    const y = yOf(val);
+    out += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="#e2e8f0" stroke-width="1"/>`;
+    out += `<text x="${padL - 10}" y="${y + 4}" text-anchor="end" font-size="12" font-weight="600" fill="#475569">${val.toFixed(0)}억</text>`;
+  }
+
+
+  // Month ticks on X-axis
+  for (const m of MONTHS) {
+    const x = xOf(m);
+    const label = m.slice(2, 7).replace("-", ".");
+    out += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${padT + plotH}" stroke="#f1f5f9" stroke-width="1"/>`;
+    out += `<text x="${x}" y="${padT + plotH + 22}" text-anchor="middle" font-size="11.5" font-weight="600" fill="#475569">${label}</text>`;
+  }
+  out += `<text x="${padL + plotW/2}" y="${H - 8}" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e293b">가로축: 거래/관찰 시기 (2025년 6월 ~ 2026년 9월) | 세로축: 아파트 가격 (억 원)</text>`;
+
+
+  // Policy vertical dashed lines
+  for (const pl of POLICY_LINES) {
+    const x = xOf(pl.d);
+    out += `<line x1="${x}" y1="${padT - 12}" x2="${x}" y2="${padT + plotH}" stroke="${pl.color}" stroke-width="2" stroke-dasharray="6,4"/>`;
+    out += `<rect x="${x - 74}" y="${padT - pl.dy - 14}" width="148" height="20" rx="5" fill="${pl.color}"/>`;
+    out += `<text x="${x}" y="${padT - pl.dy}" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">${pl.label}</text>`;
+  }
+
+
+  // Collect right-side labels to de-overlap
+  let endLabels = [];
+
+
+  for (const c of activeList) {
+    // Draw tx line
+    const pts = c.tx.map(pt => `${xOf(pt.d).toFixed(1)},${yOf(pt.p).toFixed(1)}`).join(" ");
+    const strokeW = selectedId === "ALL" ? 2.4 : 3.5;
+    out += `<polyline points="${pts}" fill="none" stroke="${c.color}" stroke-width="${strokeW}" stroke-linecap="round" stroke-linejoin="round" style="cursor:pointer;" onclick="event.stopPropagation(); selectApt('${c.id}')"/>`;
+
+
+    for (let idx = 0; idx < c.tx.length; idx++) {
+      const pt = c.tx[idx];
+      const cx = xOf(pt.d), cy = yOf(pt.p);
+      out += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${selectedId === 'ALL' ? 4 : 5.5}" fill="${c.color}" stroke="#fff" stroke-width="1.5" style="cursor:pointer;" onclick="event.stopPropagation(); selectApt('${c.id}')">`;
+      out += `<title>[${c.name}] ${pt.d} 실거래: ${pt.p}억 (${pt.note})</title></circle>`;
+      if (selectedId !== "ALL") {
+        const dy = (idx % 2 === 0) ? -10 : 16;
+        out += `<text x="${cx.toFixed(1)}" y="${(cy + dy).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="700" fill="${c.color}">${pt.p}억</text>`;
+      }
+    }
+
+
+    const lastPt = c.tx[c.tx.length - 1];
+    endLabels.push({
+      id: c.id,
+      text: c.name.split(" (")[0] + " " + lastPt.p + "억",
+      color: c.color,
+      y: yOf(lastPt.p),
+      x: xOf(lastPt.d)
+    });
+
+
+    // If single complex selected, also draw asking price floor and jeonse asking price
+    if (selectedId !== "ALL") {
+      if (c.ask && c.ask.length > 0) {
+        const askPts = c.ask.map(pt => `${xOf(pt.d).toFixed(1)},${yOf(pt.p).toFixed(1)}`).join(" ");
+        out += `<polyline points="${askPts}" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6,4"/>`;
+        for (const pt of c.ask) {
+          const cx = xOf(pt.d), cy = yOf(pt.p);
+          out += `<rect x="${cx - 4}" y="${cy - 4}" width="8" height="8" fill="#2563eb" stroke="#fff" stroke-width="1"><title>[매도최저호가] ${pt.d}: ${pt.p}억 (${pt.note})</title></rect>`;
+          out += `<text x="${cx.toFixed(1)}" y="${(cy + 15).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">호가 ${pt.p}억</text>`;
+        }
+      }
+      if (c.jeonse && c.jeonse.length > 0) {
+        const jPts = c.jeonse.map(pt => `${xOf(pt.d).toFixed(1)},${yOf(pt.p).toFixed(1)}`).join(" ");
+        out += `<polyline points="${jPts}" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-dasharray="3,3"/>`;
+        for (const pt of c.jeonse) {
+          const cx = xOf(pt.d), cy = yOf(pt.p);
+          out += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="4" fill="#16a34a" stroke="#fff" stroke-width="1"><title>[84㎡ 전세호가] ${pt.d}: ${pt.p}억 (${pt.note})</title></circle>`;
+          out += `<text x="${cx.toFixed(1)}" y="${(cy - 8).toFixed(1)}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#15803d">전세 ${pt.p}억</text>`;
+        }
+      }
+    }
+  }
+
+
+  // De-overlap right-hand labels
+  endLabels.sort((a, b) => a.y - b.y);
+  const minGap = 15;
+  for (let i = 1; i < endLabels.length; i++) {
+    if (endLabels[i].y - endLabels[i - 1].y < minGap) {
+      endLabels[i].y = endLabels[i - 1].y + minGap;
+    }
+  }
+  for (const lb of endLabels) {
+    out += `<text x="${W - padR + 8}" y="${lb.y + 4}" font-size="11.5" font-weight="700" fill="${lb.color}" style="cursor:pointer;" onclick="event.stopPropagation(); selectApt('${lb.id}')">${lb.text}</text>`;
+  }
+
+
+  svg.innerHTML = out;
+}
+
+
+function renderTable() {
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const reg = document.getElementById("regionSelect").value;
+  const ph = document.getElementById("phaseSelect").value;
+  const tbody = document.getElementById("dataTableBody");
+
+
+  const filtered = ALL_ROWS.filter(r => {
+    if (reg !== "ALL" && !r["권역"].includes(reg)) return false;
+    if (ph !== "ALL" && !r["정책_국면_구분"].startsWith(ph)) return false;
+    if (q) {
+      const hay = (r["단지명"] + " " + r["법정동_지역"] + " " + r["호가_실거래_관계_및_정책반응_해석"] + " " + r["권역"]).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+
+  let html = "";
+  for (const r of filtered) {
+    const sp = r["최저호가_대비_실거래_괴리(억원)"];
+    let spColor = "#475569";
+    if (sp.startsWith("+")) spColor = "#dc2626";
+    if (sp.startsWith("-")) spColor = "#2563eb";
+    html += `<tr>
+      <td style="white-space:nowrap;font-weight:600;">${r["계약일_또는_기준일"]}</td>
+      <td style="white-space:nowrap;color:#475569;">${r["연월_주차_구분"]}</td>
+      <td style="font-size:12px;">${r["정책_국면_구분"]}</td>
+      <td style="white-space:nowrap;">${r["권역"]}</td>
+      <td style="white-space:nowrap;font-weight:700;">${r["단지명"]}</td>
+      <td class="num">${r["전용면적(㎡)"]}</td>
+      <td class="num" style="color:#0f172a;font-weight:800;">${r["실거래가(억원)"]}</td>
+      <td class="num" style="color:#1d4ed8;">${r["당시_매도최저호가(억원)"]}</td>
+      <td class="num" style="color:#15803d;">${r["당시_전세호가_84㎡(억원)"]}</td>
+      <td class="num" style="color:${spColor};font-weight:700;">${sp}</td>
+      <td style="font-size:12px;">${r["층_또는_거래건수"]}</td>
+      <td style="font-size:12.5px;">${r["호가_실거래_관계_및_정책반응_해석"]}</td>
+      <td style="white-space:nowrap;"><a href="${r["출처_URL"]}" target="_blank">원본확인</a></td>
+    </tr>`;
+  }
+  tbody.innerHTML = html;
+}
+
+
+document.getElementById("searchInput").addEventListener("input", renderTable);
+document.getElementById("regionSelect").addEventListener("change", renderTable);
+document.getElementById("phaseSelect").addEventListener("change", renderTable);
+
+
+renderButtons();
+renderChart();
+renderTable();
+</script>
+</body>
+</html>
